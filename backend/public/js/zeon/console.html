@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Zeon console</title>
+		<style>
+			#dbg { position: absolute; top: 0; left: 350px; }
+			
+			textarea {
+				white-space: pre; 
+				font-family: monospace; 
+				line-height: 20px; 
+				font-size: 12px; 
+			
+				box-sizing: border-box;
+				margin: 0; 
+				overflow: auto; 
+				border: 1px solid black;
+				outline: 0;
+				
+				width: 160px;
+			}
+			[class^="zeon-prefix"] {
+				text-decoration: none!important;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 onclick="demo();" >Zeon.js console</h1>
+		<p>Putting the semi colon back in js</p>
+
+		<textarea></textarea>
+		<pre id="dbg"></pre>
+		<div id="out"></div>
+
+		<script>
+			new function(){
+				// fix size of textarea before zeonifing it
+				var e = document.getElementsByTagName('textarea')[0];
+				e.style.width = window.innerWidth - 50 + 'px';
+				e.style.height = window.innerHeight - 150 + 'px';
+				e.value = "<?php xxxx ?>";
+			};
+		</script>
+		<script src="zeparser/unicodecategories.js"></script>
+		<script src="zeparser/Tokenizer.js"></script>
+		<script src="zeparser/ZeParser.js"></script>
+		<script src="Ast.js"></script>
+		<script src="Gui.js"></script>
+		<script src="Gui.Config.js"></script>
+		<script src="Gui.Nav.js"></script>
+		<script src="Gui.Filter.js"></script>
+		<script src="Gui.Warning.js"></script>
+		<script src="Gui.Search.js"></script>
+		
+		<script src="fuzzing/fuzzRuderManOriginal.js"></script>
+		<script src="fuzzing/fuzzRuderManEdited.js"></script>
+		<script src="fuzzing/fuzzZee.js"></script>
+		<script src="fuzzing/crapper.js"></script>
+
+		<script src="Zeon.js"></script>
+		
+		<script>
+			var gui = Gui.start(true);
+			gui.enableDnD();
+			gui.setPaddingTop(4);
+			window.onresize = function(e){
+				gui.resize((window.innerWidth - 40), (window.innerHeight - 150));
+			}.bind(this);
+			
+			function demo() {
+				var e = document.getElementsByTagName('textarea')[0];
+				console.log(e.value);
+			}
+		</script>
+		
+	</body>
+</html>

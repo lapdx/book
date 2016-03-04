@@ -1,0 +1,84 @@
+/*common css*/
+.btn{
+	border:none;
+	padding:7px 15px;
+	text-transform:uppercase;
+}
+.btn-primary{
+	background-color:#353d41;
+}
+.btn-primary:hover{
+	background-color:#000;
+}
+.btn-default{
+}
+.btn-default:hover{
+}
+.form-control{
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	-moz-border-radius:0;
+	-webkit-border-radius:0;
+	border-radius:0;
+}
+.text-inlineblock{
+	display:inline-block;
+	vertical-align:top;
+	width:auto;
+}
+.text-danger{
+	color:#fa8600;
+}
+.box-captcha{
+	display:inline-block;
+	border:1px solid #b8b8b8;
+	margin:0 0 5px;
+	vertical-align:middle;
+}
+.btnnewimg{
+    background: url(../images/btnnewimg.png) no-repeat;
+    border:none;
+    box-shadow:none;
+    cursor:pointer;
+    height:31px;
+    margin:0 0 0 5px !important;
+    text-indent:-9999px;
+    vertical-align:middle !important;
+    width:30px;
+	display:inline-block;
+}
+/*end common css*/
+.form-horizontal .control-label{
+	text-align:left;
+}
+.contact-form{
+	padding:15px;
+}
+.login-other{
+	padding:30px 0 15px;
+}
+a.other-button{
+	display:inline-block;
+	vertical-align:top;
+	padding:10px 30px;
+	color:#fff;
+	font-size:14px;
+	text-decoration:none;
+	margin-bottom:15px;
+	text-align:center;
+	min-width:150px;
+}
+.other-button .fa{
+	font-size:20px;
+	color:#fff;
+	margin-right:7px;
+	margin-top:2px;
+	vertical-align:top;
+}
+.btn-facebook{
+	background:#3c5998;
+}
+.btn-google{
+	background:#0095d4;
+}
