@@ -44,8 +44,6 @@ class NewsController extends ServiceController {
 
         $form = new NewsForm();
         $form->setAttributes(Yii::$app->request->getBodyParams());
-        $form->createEmail = Yii::$app->user->getId();
-        $form->updateEmail = Yii::$app->user->getId();
         $cateName = NewsCategoryBusiness::get($form->categoryId);
         $form->categoryName = $cateName->name;
 

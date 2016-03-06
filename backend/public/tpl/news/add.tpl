@@ -29,24 +29,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-4">Hiển thị trang chủ:</label>
-        <div class="col-sm-4">
-            <select name="home" class="form-control">
-                <option value="1" <%= (typeof data != 'undefined' && data.home == 1 ?  'selected' : '') %>>Hiển thị</option>
-                <option value="0" <%= (typeof data != 'undefined' && data.home != 1 ?  'selected' : '') %>>Tạm khóa</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-sm-4">Hiển thị footer:</label>
-        <div class="col-sm-4">
-            <select name="footer" class="form-control">
-                <option value="1" <%= (typeof data != 'undefined' && data.footer == 1 ?  'selected' : '') %>>Hiển thị</option>
-                <option value="0" <%= (typeof data != 'undefined' && data.footer != 1 ?  'selected' : '') %>>Tạm khóa</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="control-label col-sm-4">Mô tả:</label>
         <div class="col-sm-4">
             <textarea name="description" class="form-control" style="height: 50px; margin: auto" ><%= typeof data != 'undefined'?data.description:'' %></textarea>

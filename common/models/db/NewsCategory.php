@@ -16,9 +16,6 @@ use Yii;
  * @property integer $position
  * @property integer $createTime
  * @property integer $updateTime
- * @property string $createEmail
- * @property string $updateEmail
- * @property integer $menu
  */
 class NewsCategory extends \yii\db\ActiveRecord
 {
@@ -36,11 +33,10 @@ class NewsCategory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['alias', 'name', 'description', 'createEmail', 'updateEmail'], 'required'],
+            [['alias', 'name', 'description'], 'required'],
             [['description'], 'string'],
-            [['parentId', 'active', 'position', 'createTime', 'updateTime', 'menu'], 'integer'],
+            [['parentId', 'active', 'position', 'createTime', 'updateTime'], 'integer'],
             [['alias', 'name'], 'string', 'max' => 220],
-            [['createEmail', 'updateEmail'], 'string', 'max' => 100],
             [['alias'], 'unique']
         ];
     }
@@ -60,9 +56,6 @@ class NewsCategory extends \yii\db\ActiveRecord
             'position' => 'Position',
             'createTime' => 'Create Time',
             'updateTime' => 'Update Time',
-            'createEmail' => 'Create Email',
-            'updateEmail' => 'Update Email',
-            'menu' => 'Menu',
         ];
     }
 }

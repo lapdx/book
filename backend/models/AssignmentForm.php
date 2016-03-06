@@ -14,7 +14,8 @@ class AssignmentForm extends Model {
 
     public function rules() {
         return [
-            [['userId', 'roles'], 'string'],
+            [['roles'], 'string'],
+            [['userId'], 'integer'],
         ];
     }
 
@@ -28,7 +29,7 @@ class AssignmentForm extends Model {
                 $dbManager->assign($dbManager->getPermission($role), $this->userId);
             }
         }
-        return new Response(true, "Assign role admin " . $this->userId . " success", $this->roles);
+        return new Response(true, "Assign role admin success", $this->roles);
     }
 
 }

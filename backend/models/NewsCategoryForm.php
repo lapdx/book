@@ -17,14 +17,13 @@ class NewsCategoryForm extends Model {
     public $description;
     public $parentId;
     public $active;
-    public $menu;
     public $position;
 
     public function rules() {
         return [
             [['alias', 'name', 'description'], 'required', 'message' => '{attribute} không được để trống'],
             [['description'], 'string'],
-            [['parentId', 'active','menu', 'position', 'id'], 'integer', 'message' => '{attribute} phải là số'],
+            [['parentId', 'active','position', 'id'], 'integer', 'message' => '{attribute} phải là số'],
             [['alias', 'name'], 'string', 'max' => 220],
         ];
     }
@@ -46,7 +45,6 @@ class NewsCategoryForm extends Model {
         if ($cate == null) {
             $cate = new NewsCategory();
             $cate->createTime = time();
-            $cate->createEmail = Yii::$app->user->getId();;
         } else {
             if ($this->parentId != $cate->parentId) {
                 if ($cate->parentId == 0 && NewsCategoryBusiness::getParentId($this->id) != null) {
@@ -77,10 +75,8 @@ class NewsCategoryForm extends Model {
         $cate->alias = $this->genAlias();
         $cate->description = $this->description;
         $cate->active = $this->active == 1 ? 1 : 0;
-        $cate->menu = $this->menu == 1 ? 1 : 0;
         $cate->position = $this->position;
         $cate->updateTime = time();
-        $cate->updateEmail = Yii::$app->user->getId();;
         if (!$cate->save()) {
             return new Response(false, "Thao tác thất bại", $cate->errors);
         }

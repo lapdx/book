@@ -12,18 +12,8 @@
     <td class="text-center" style="vertical-align: middle"><%= textUtils.formatTime(data.createTime) %></td>
     <td class="text-center" style="vertical-align: middle"><%= textUtils.formatTime(data.updateTime) %></td>
     <td class="text-center" style="vertical-align: middle">
-        <div data-key-nav="<%= data.id %>">
-            <%= '<label class="label label-' + (data.home == 1 ? 'success' : 'danger') + '" >' + (data.home == 1 ? 'Hiển thị' : 'Tạm khóa') + '</label><i onclick="news.changeHome(\'' + data.id + '\')" style="cursor: pointer; margin-left: 5px" class="glyphicon glyphicon-' + (data.home == 1 ? 'check' : 'unchecked') + '" />' %>
-        </div>
-    </td>
-    <td class="text-center" style="vertical-align: middle">
         <div data-key-active="<%= data.id %>">
             <%= '<label class="label label-' + (data.active == 1 ? 'success' : 'danger') + '" >' + (data.active == 1 ? 'Hiển thị' : 'Tạm khóa') + '</label><i onclick="news.changeActive(\'' + data.id + '\')" style="cursor: pointer; margin-left: 5px" class="glyphicon glyphicon-' + (data.active == 1 ? 'check' : 'unchecked') + '" />' %>
-        </div>
-    </td>
-    <td class="text-center" style="vertical-align: middle">
-        <div data-key-footer="<%= data.id %>">
-            <%= '<label class="label label-' + (data.footer == 1 ? 'success' : 'danger') + '" >' + (data.footer == 1 ? 'Hiển thị' : 'Tạm khóa') + '</label>' %>
         </div>
     </td>
     <td class="text-center" style="vertical-align: middle">

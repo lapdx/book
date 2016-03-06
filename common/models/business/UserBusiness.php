@@ -11,23 +11,27 @@ use Yii;
 class UserBusiness {
 
     /**
-     * get by admin email
-     * @param type $email
+     * get by admin id
+     * @param type $id
      * @return type
      */
-    public static function get($email) {
-        return User::findOne($email);
+    public static function get($id) {
+        return User::findOne($id);
+    }
+
+    public static function getByLogin($username,$password,$type='admin'){
+        return User::find()->andWhere(['=','username',$username])->andWhere(['=','password',$password])->andWhere(['=','type',$type])->one();
     }
 
     /**
      * Admin change active
-     * @param type $email
+     * @param type $id
      * @return Response
      */
-    public static function changeActive($email) {
-        $admin = self::get($email);
+    public static function changeActive($id) {
+        $admin = self::get($id);
         if ($admin == null) {
-            return new Response(false, "Admin don't exits", []);
+            return new Response(false, "User don't exits", []);
         }
         $admin->active = $admin->active ? 0 : 1;
         $admin->save();

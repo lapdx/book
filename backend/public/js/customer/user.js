@@ -52,3 +52,82 @@ user.changeActive = function (id) {
         }
     });
 };
+user.setRole = function (_email) {
+    ajax({
+        service: '/function/getassignment',
+        data: {userId: _email},
+        done: function (resp) {
+            if (resp.success) {
+                popup.open("popup-admin-role", "Decentralized governance", Fly.template('/user/role.tpl', resp), [
+                    {
+                        title: '<span data-rel="btn" >Chọn<span>',
+                        style: 'btn-link',
+                        fn: function () {
+                            var check = $("input[data-rel=check_all]").is(":checked");
+                            if (check) {
+                                $("span[data-rel=btn]").html("Chọn");
+                            } else {
+                                $("span[data-rel=btn]").html("Bỏ");
+                            }
+                            $("input[data-rel=check_all]").attr("checked", !check).change();
+                        }
+                    },
+                    {
+                        title: 'Cấp quyền',
+                        style: 'btn-info',
+                        fn: function () {
+                            var form = new Object();
+                            form.userId = _email;
+                            form.roles = [];
+                            $.each($("input[data-rel=function]"), function () {
+                                if ($(this).is(":checked")) {
+                                    form.roles.push($(this).attr("data-id"));
+                                }
+                            });
+
+                            ajax({
+                                service: '/user/assignment',
+                                data: form,
+                                type: 'post',
+                                loading: false,
+                                contentType: 'json',
+                                done: function (resp) {
+                                    if (resp.success) {
+                                        popup.msg(resp.message, function () {
+                                            popup.close('popup-admin-role');
+                                            $("tr[data-key='" + _email + "']").addClass("success");
+                                        });
+                                    } else {
+                                        popup.msg(resp.message);
+                                    }
+                                }
+                            });
+
+                        }
+                    },
+                    {
+                        title: 'Cancel',
+                        style: 'btn-default',
+                        fn: function () {
+                            popup.close('popup-admin-role');
+                        }
+                    }
+                ]);
+
+                setTimeout(function () {
+                    $("input[data-rel=check_all]").change(function () {
+                        $("input[data-group=" + $(this).attr("data-id") + "]").attr("checked", $(this).is(":checked"));
+                    });
+                    $.each(resp.data.assignments, function () {
+                        if ($("input[data-id=" + this.item_name + "]").length > 0) {
+                            $("input[data-id=" + this.item_name + "]").attr({"checked": "true"});
+                        }
+                    });
+                }, 300);
+
+            } else {
+                popup.msg(resp.message);
+            }
+        }
+    });
+};

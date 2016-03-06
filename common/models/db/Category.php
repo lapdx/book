@@ -16,8 +16,6 @@ use Yii;
  * @property integer $position
  * @property integer $createTime
  * @property integer $updateTime
- * @property string $createEmail
- * @property string $updateEmail
  */
 class Category extends \yii\db\ActiveRecord {
 
@@ -33,11 +31,10 @@ class Category extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['alias', 'name', 'description', 'createEmail', 'updateEmail'], 'required'],
+            [['alias', 'name', 'description'], 'required'],
             [['description'], 'string'],
             [['parentId', 'active', 'position', 'createTime', 'updateTime'], 'integer'],
             [['alias', 'name'], 'string', 'max' => 220],
-            [['createEmail', 'updateEmail'], 'string', 'max' => 100],
             [['alias'], 'unique']
         ];
     }
@@ -56,8 +53,6 @@ class Category extends \yii\db\ActiveRecord {
             'position' => 'Position',
             'createTime' => 'Create Time',
             'updateTime' => 'Update Time',
-            'createEmail' => 'Create Email',
-            'updateEmail' => 'Update Email',
         ];
     }
 

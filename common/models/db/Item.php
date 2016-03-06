@@ -15,62 +15,59 @@ use Yii;
  * @property string $description
  * @property string $content
  * @property integer $categoryId
- * @property integer $partnersId
- * @property integer $type
- * @property integer $power
- * @property integer $gift
- * @property string $origin
  * @property string $categoryName
  * @property integer $createTime
  * @property integer $updateTime
+ * @property string $author
  */
-class Item extends \yii\db\ActiveRecord {
-
+class Item extends \yii\db\ActiveRecord
+{
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'item';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            [['name', 'sellPrice', 'startPrice', 'active', 'categoryId', 'partnersId', 'power', 'origin'], 'required'],
-            [['sellPrice', 'startPrice'], 'number'],
-            [['active', 'categoryId', 'partnersId', 'type','noise', 'power', 'createTime', 'updateTime'], 'integer'],
-            [['content'], 'string'],
-            [['name', 'description', 'origin', 'categoryName','gift'], 'string', 'max' => 500]
+        [['name', 'sellPrice', 'startPrice', 'active', 'categoryId'], 'required'],
+        [['sellPrice', 'startPrice'], 'number'],
+        [['active', 'categoryId', 'createTime', 'updateTime'], 'integer'],
+        [['content'], 'string'],
+        [['name', 'categoryName'], 'string', 'max' => 255],
+        [['description'], 'string', 'max' => 500],
+        [['author'], 'string', 'max' => 200]
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'sellPrice' => 'Sell Price',
-            'startPrice' => 'Start Price',
-            'active' => 'Active',
-            'description' => 'Description',
-            'content' => 'Content',
-            'categoryId' => 'Category ID',
-            'partnersId' => 'Partners ID',
-            'type' => 'Type',
-            'power' => 'Power',
-            'origin' => 'Origin',
-            'categoryName' => 'Category Name',
-            'createTime' => 'Create Time',
-            'updateTime' => 'Update Time',
+        'id' => 'ID',
+        'name' => 'Name',
+        'sellPrice' => 'Sell Price',
+        'startPrice' => 'Start Price',
+        'active' => 'Active',
+        'description' => 'Description',
+        'content' => 'Content',
+        'categoryId' => 'Category ID',
+        'categoryName' => 'Category Name',
+        'createTime' => 'Create Time',
+        'updateTime' => 'Update Time',
+        'author' => 'Author',
         ];
     }
 
     public function attributes() {
         return array_merge(parent::attributes(), ['images']);
     }
-
 }

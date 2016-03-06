@@ -19,8 +19,6 @@ class NewsSearch extends Model {
     public $sort;
     public $page;
     public $pageSize;
-    public $createEmail;
-    public $updateEmail;
     public $createTimeFrom;
     public $updateTimeFrom;
     public $createTimeTo;
@@ -30,8 +28,8 @@ class NewsSearch extends Model {
 
     public function rules() {
         return [
-            [['keyword', 'sort', 'createEmail', 'updateEmail'], 'string'],
-            [['pageSize', 'categoryId', 'categoryIds', 'page', 'active', 'createTimeFrom', 'updateTimeFrom', 'createTimeTo', 'updateTimeTo','home'], 'integer'],
+            [['keyword', 'sort'], 'string'],
+            [['pageSize', 'categoryId', 'categoryIds', 'page', 'active', 'createTimeFrom', 'updateTimeFrom', 'createTimeTo', 'updateTimeTo'], 'integer'],
         ];
     }
 
@@ -47,12 +45,6 @@ class NewsSearch extends Model {
         }
         if ($this->keyword != null && $this->keyword != '') {
             $query->andWhere(['LIKE', 'name', strtolower($this->keyword)])->orWhere(['LIKE', 'detail', strtolower($this->keyword)])->orWhere(['LIKE', 'alias', strtolower($this->keyword)]);
-        }
-        if ($this->createEmail != null && $this->createEmail != '') {
-            $query->andWhere(['LIKE', 'createEmail', strtolower($this->createEmail)]);
-        }
-        if ($this->updateEmail != null && $this->updateEmail != '') {
-            $query->andWhere(['LIKE', 'updateEmail', strtolower($this->updateEmail)]);
         }
         if ($this->categoryId != null && $this->categoryId > 0) {
             $query->andWhere(['=', 'categoryId', strtolower($this->categoryId)]);

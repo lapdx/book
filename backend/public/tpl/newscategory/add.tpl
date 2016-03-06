@@ -28,15 +28,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-sm-4">Menu:</label>
-        <div class="col-sm-4">
-            <select name="menu" class="form-control">
-                <option value="1" <%= (typeof data != 'undefined' && data.menu == 1 ?  'selected' : '') %>>Hoạt động</option>
-                <option value="0" <%= (typeof data != 'undefined' && data.menu == 0 ?  'selected' : '') %>>Tạm khóa</option>
-            </select>
-        </div>
-    </div>
-    <div class="form-group">
         <label class="control-label col-sm-4">Thứ tự:</label>
         <div class="col-sm-8">
             <input name="position" type="text" class="form-control" value="<%= typeof data != 'undefined'?data.position:0 %>"/>

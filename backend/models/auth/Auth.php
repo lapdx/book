@@ -2,7 +2,7 @@
 
 namespace backend\models\auth;
 
-use common\models\business\AdministratorBusiness;
+use common\models\business\UserBusiness;
 use nodge\eauth\ServiceBase;
 use yii\base\ErrorException;
 use yii\base\Object;
@@ -13,11 +13,13 @@ class Auth extends Object implements IdentityInterface {
 
     public $id;
     public $authKey;
+    public $username;
 
     public static function findIdentity($id) {
-        $admin = AdministratorBusiness::get($id);
+        $admin = UserBusiness::get($id);
         $auth = new Auth();
         $auth->id = $admin->id;
+        $auth->username = $admin->username;
         return $auth;
     }
 
@@ -28,7 +30,7 @@ class Auth extends Object implements IdentityInterface {
      */
     public function getId() {
         return $this->id;
-    }
+    } 
 
     public function getAuthKey() {
         return $this->authKey;

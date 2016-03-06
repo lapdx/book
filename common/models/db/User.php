@@ -7,13 +7,15 @@ use Yii;
 /**
  * This is the model class for table "user".
  *
- * @property string $id
- * @property string $description
- * @property integer $joinTime
+ * @property integer $id
+ * @property string $username
+ * @property string $password
  * @property integer $active
- * @property integer $lastTime
+ * @property string $type
  * @property integer $role
- * @property string $rememberKey
+ * @property string $email
+ * @property string $fullname
+ * @property string $phone
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -31,11 +33,11 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['description'], 'string'],
-            [['joinTime', 'active', 'lastTime', 'role'], 'integer'],
-            [['id'], 'string', 'max' => 100],
-            [['rememberKey'], 'string', 'max' => 32]
+            [['username'], 'required'],
+            [['active', 'role'], 'integer'],
+            [['username', 'password', 'email', 'fullname'], 'string', 'max' => 200],
+            [['type'], 'string', 'max' => 50],
+            [['phone'], 'string', 'max' => 20]
         ];
     }
 
@@ -46,12 +48,13 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'description' => 'Description',
-            'joinTime' => 'Join Time',
+            'username' => 'Username',
+            'password' => 'Password',
             'active' => 'Active',
-            'lastTime' => 'Last Time',
+            'type' => 'Type',
             'role' => 'Role',
-            'rememberKey' => 'Remember Key',
+            'email' => 'Email',
+            'fullname' => 'Fullname',
         ];
     }
 }

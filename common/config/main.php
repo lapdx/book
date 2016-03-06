@@ -8,7 +8,7 @@ return [
         ],
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=hoalua',
+            'dsn' => 'mysql:host=localhost;dbname=book',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',

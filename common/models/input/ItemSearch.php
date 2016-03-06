@@ -15,12 +15,6 @@ class ItemSearch extends Model {
     public $active;
     public $categoryId;
     public $categoryIds;
-    public $partnersIds;
-    public $powers;
-    public $prices;
-    public $origins;
-    public $types;
-    public $noises;
     public $sort;
     public $page;
     public $pageSize;
@@ -31,7 +25,7 @@ class ItemSearch extends Model {
     public function rules() {
         return [
             [['keyword', 'sort', 'ids'], 'string'],
-            [['pageSize', 'page', 'active','partnersIds','categoryIds','categoryId','powers','noises','types','prices','origins'], 'integer'],
+            [['pageSize', 'page', 'active','categoryIds','categoryId'], 'integer'],
         ];
     }
 
@@ -48,21 +42,7 @@ class ItemSearch extends Model {
         if (!is_array($this->categoryIds)) {
             $this->categoryIds = [];
         }
-        if (!is_array($this->partnersIds)) {
-            $this->partnersIds = [];
-        }
-        if (!is_array($this->powers)) {
-            $this->powers = [];
-        }
-        if (!is_array($this->noises)) {
-            $this->noises = [];
-        }
-        if (!is_array($this->types)) {
-            $this->types = [];
-        }
-        if (!is_array($this->prices)) {
-            $this->prices = [];
-        }
+        
         if (!empty($this->ids) && sizeof($this->ids) > 0) {
             $query = Item::find()->where(['id' => $this->ids]);
         } else {
@@ -77,74 +57,6 @@ class ItemSearch extends Model {
             }
             if (!empty($this->categoryIds)) {
                 $query->andWhere(['categoryId'=>$this->categoryIds]);
-            }
-            if (!empty($this->partnersIds)) {
-                $query->andWhere(['partnersId'=>$this->partnersIds]);
-            }
-            if (!empty($this->types)) {
-                $query->andWhere(['type'=>$this->types]);
-                if(in_array(5, $this->types)){
-                $query->andWhere(['>','type',4]);    
-                }
-            }
-            if (!empty($this->powers)) {
-                if(in_array(1, $this->powers)){
-                $query->andWhere(['between','power',1000,3000]);    
-                }
-                if(in_array(2, $this->powers)){
-                $query->andWhere(['between','power',3000,5000]);    
-                }
-                if(in_array(3, $this->powers)){
-                $query->andWhere(['between','power',4500,6000]);    
-                }
-                if(in_array(4, $this->powers)){
-                $query->andWhere(['between','power',6000,7500]);    
-                }
-                if(in_array(5, $this->powers)){
-                $query->andWhere(['>','power',7500]);    
-                }
-            }
-            if (!empty($this->noises)) {
-                if(in_array(1, $this->noises)){
-                $query->andWhere(['between','noise',40,45]);    
-                }
-                if(in_array(2, $this->noises)){
-                $query->andWhere(['between','noise',45,50]);    
-                }
-                if(in_array(3, $this->noises)){
-                $query->andWhere(['between','noise',50,55]);    
-                }
-                if(in_array(4, $this->noises)){
-                $query->andWhere(['between','noise',55,60]);    
-                }
-                if(in_array(5, $this->noises)){
-                $query->andWhere(['>','noise',60]);    
-                }
-            }
-            if (!empty($this->prices)) {
-                if(in_array(1, $this->prices)){
-                $query->andWhere(['between','sellPrice',1000000,3000000]);    
-                }
-                if(in_array(2, $this->prices)){
-                $query->andWhere(['between','sellPrice',3000000,5000000]);    
-                }
-                if(in_array(3, $this->prices)){
-                $query->andWhere(['between','sellPrice',5000000,10000000]);    
-                }
-                if(in_array(4, $this->prices)){
-                $query->andWhere(['between','sellPrice',10000000,15000000]);    
-                }
-                if(in_array(5, $this->prices)){
-                $query->andWhere(['between','sellPrice',15000000,20000000]);    
-                }
-                if(in_array(6, $this->prices)){
-                $query->andWhere(['>','sellPrice',20000000]);    
-                }
-            }
-            if (!empty($this->origins)) {
-                foreach ($this->origins as $value) {
-                    $query->andWhere(['LIKE','origin',$value]);
-                }
             }
             
         }

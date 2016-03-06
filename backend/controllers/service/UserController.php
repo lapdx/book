@@ -2,6 +2,7 @@
 
 namespace backend\controllers\service;
 
+use backend\models\AssignmentForm;
 use common\models\business\UserBusiness;
 use common\models\db\User;
 use common\models\input\UserSearch;
@@ -38,6 +39,17 @@ class UserController extends ServiceController {
         $id = Yii::$app->request->get('id');
         return $this->response(UserBusiness::changeActive($id));
     }
+    /**
+     * Assignment admin system
+     * @return type
+     */
+    public function actionAssignment() {
+        if (is_object($resp = $this->can("assignment"))) {
+            return $this->response($resp);
+        }
+        $form = new AssignmentForm();
+        $form->setAttributes($form->setAttributes(Yii::$app->request->getBodyParams()));
+        return $this->response($form->save());
+    }
 
-   
 }

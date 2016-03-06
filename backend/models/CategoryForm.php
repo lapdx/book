@@ -45,7 +45,6 @@ class CategoryForm extends Model {
         if ($cate == null) {
             $cate = new Category();
             $cate->createTime = time();
-            $cate->createEmail = Yii::$app->user->getId();;
         } else {
             if ($this->parentId != $cate->parentId) {
                 if ($cate->parentId == 0 && CategoryBusiness::getParentId($this->id) != null) {
@@ -78,7 +77,6 @@ class CategoryForm extends Model {
         $cate->active = $this->active == 1 ? 1 : 0;
         $cate->position = $this->position;
         $cate->updateTime = time();
-        $cate->updateEmail = Yii::$app->user->getId();;
         if (!$cate->save()) {
             return new Response(false, "Thao tác thất bại", $cate->errors);
         }

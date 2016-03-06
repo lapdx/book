@@ -1,14 +1,15 @@
 var auth = {};
 
 auth.signin = function () {
-    layout.title("Đăng nhập hệ thống Hoa lua");
+    layout.title("Manager website");
     $("body").html("");
-    $("body").addClass("bg-login");
+    // $("body").addClass("bg-login");
     $("body").prepend(Fly.template("/auth/signin.tpl", null));
 
     setTimeout(function () {
         $('[data-click="signin"]').click(function () {
-            auth.googleSignin();
+            // auth.googleSignin();
+            auth.submitForm();
         });
     }, 300);
 
@@ -56,7 +57,7 @@ auth.googleSignin = function () {
                                     setTimeout(function () {
                                         window.location.href = baseUrl ;
 //                                        location.reload();
-                                    }, 1000);
+}, 1000);
                                 } else {
                                     $("div[data-rel=message]").html('<div class="alert alert-warning alert-login">' + rs.message + '</div>');
                                 }
@@ -64,7 +65,33 @@ auth.googleSignin = function () {
                         });
                     }
                 });
-            });
-        });
-    }, 1);
+});
+});
+}, 1);
 };
+
+auth.submitForm = function(){
+    var username = $("#username").val();
+    var password = $("#password").val();
+    var user = {
+        username:username,
+        password:password
+    }
+    ajax({
+        service: '/auth/signin',
+        data: user,
+        contentType: 'json',
+        type: 'post',
+        loading: false,
+        done: function (rs) {
+            if (rs.success) {
+                $("#error").text(rs.message);
+                setTimeout(function () {
+                    window.location.href = baseUrl ;
+                }, 1000);
+            } else {
+                $("#error").text(rs.message);
+            }
+        }
+    });
+}

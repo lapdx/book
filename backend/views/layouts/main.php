@@ -28,7 +28,7 @@ WebAsset::register($this);
                 <div class="admin-right">
                     <div class="user-label">
                         <div class="user-avatar"><img src="images/no_avatar.png" alt="avatar" /></div>
-                        <?= Yii::$app->user->getId() ?>
+                        <?= isset(Yii::$app->user->identity->username)?Yii::$app->user->identity->username:'' ?>
                         <b class="caret"></b>
                     </div>
                     <ul>
@@ -56,7 +56,7 @@ WebAsset::register($this);
             Fly.init({
                 baseUrl: '<?= $this->context->baseUrl; ?>',
                 template: 'tpl/',
-                default: ["index", "grid"],
+                default: ["item", "grid"],
                 beforeLoad: function() {
                     if (account == "" && location.hash.indexOf("#auth/signin") == -1) {
                         console.log("red #auth/signin");

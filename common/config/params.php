@@ -2,7 +2,7 @@
 
 return [
     "image" => [
-        'baseUrl' => "http://localhost/frontend/public/"
+        'baseUrl' => "http://book/frontend/public/"
     ],
     'email' => [
         'baseUrl' => 'http://demo.weshop.asia/'

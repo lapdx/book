@@ -9,18 +9,16 @@ use yii\data\Pagination;
 // Lap Dam
 class UserSearch extends Model {
 
-    public $email;
+    public $keyword;
     public $active;
-    public $startTime;
-    public $endTime;
+    public $type;
     public $sort;
     public $page;
     public $pageSize;
 
     public function rules() {
         return [
-            [['email', 'sort'], 'string'],
-            [['startTime', 'endTime'], 'number'],
+            [['keyword', 'sort','type'], 'string'],
             [['pageSize', 'page', 'active'], 'integer'],
         ];
     }
@@ -28,30 +26,17 @@ class UserSearch extends Model {
     public function search($page = false) {
         $query = User::find();
 
-        if ($this->email != null && $this->email != '') {
-            $query->andWhere(['LIKE', 'id', strtolower($this->email)]);
+        if ($this->keyword != null && $this->keyword != '') {
+            $query->orWhere(['LIKE', 'username', strtolower($this->keyword)])->orWhere(['LIKE', 'fullname', strtolower($this->keyword)]);
         }
         if ($this->active > 0) {
             $query->andWhere(['=', 'active', $this->active == 1 ? 1 : 0]);
         }
-
-        if ($this->startTime > 0 && $this->endTime > 0) {
-            $query->andWhere(['between', 'joinTime', $this->startTime / 1000, $this->endTime / 1000]);
-        } else if ($this->startTime > 0) {
-            $query->andWhere('joinTime >= :time', [':time' => $this->startTime / 1000]);
-        } else if ($this->endTime > 0) {
-            $query->andWhere('joinTime <= :time', [':time' => $this->endTime / 1000]);
+        if ($this->type != null && $this->type != '') {
+            $query->andWhere(['=', 'type', $this->type]);
         }
+
         switch ($this->sort) {
-            case 'joinTime_asc':
-                $query->orderBy("joinTime ASC");
-                break;
-            case 'lastTime_asc':
-                $query->orderBy("lastTime ASC");
-                break;
-            case 'lastTime_desc':
-                $query->orderBy("lastTime DESC");
-                break;
             case 'active_asc':
                 $query->orderBy("active ASC");
                 break;
@@ -59,7 +44,7 @@ class UserSearch extends Model {
                 $query->orderBy("active DESC");
                 break;
             default :
-                $query->orderBy("joinTime DESC");
+                $query->orderBy("id DESC");
         }
         $dataPage = new DataPage();
         if (!$page) {

@@ -15,22 +15,18 @@ class NewsForm extends Model {
     public $name;
     public $categoryId;
     public $createTime;
-    public $createEmail;
     public $updateTime;
-    public $updateEmail;
     public $detail;
     public $description;
     public $active;
-    public $home;
-    public $footer;
     public $categoryName;
 
     public function rules() {
         return [
             [['alias', 'name', 'categoryId', 'detail','description'], 'required', 'message' => '{attribute} không được để trống'],
-            [['categoryId', 'createTime', 'updateTime', 'active', 'id','home','footer'], 'integer'],
+            [['categoryId', 'createTime', 'updateTime', 'active', 'id'], 'integer'],
             [['detail','description'], 'string'],
-            [['alias', 'name', 'createEmail', 'updateEmail', 'categoryName'], 'string', 'max' => 220]
+            [['alias', 'name', 'categoryName'], 'string', 'max' => 220]
         ];
     }
 
@@ -51,18 +47,14 @@ class NewsForm extends Model {
         if ($news == null) {
             $news = new News();
             $news->createTime = time();
-            $news->createEmail = $this->createEmail;
         }
         $news->name = $this->name;
         $news->alias = $this->genAlias();
         $news->updateTime = time();
-        $news->updateEmail = $this->updateEmail;
         $news->categoryId = $this->categoryId;
         $news->detail = $this->detail;
         $news->description = $this->description;
         $news->active = $this->active == 1 ? 1 : 0;
-        $news->home = $this->home == 1 ? 1 : 0;
-        $news->footer = $this->footer == 1 ? 1 : 0;
         $news->categoryName = $this->categoryName;
 
         if (!$news->save(false)) {

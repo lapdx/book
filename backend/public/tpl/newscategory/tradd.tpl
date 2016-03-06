@@ -11,11 +11,6 @@
         </div>
     </td>
     <td class="text-center" style="vertical-align: middle">
-        <div data-key-menu="<%= data.id %>">
-            <%= '<label class="label label-' + (data.menu == 1 ? 'success' : 'danger') + '" >' + (data.menu == 1 ? 'Hiển thị' : 'Tạm khóa') + '</label><i onclick="newscategory.changeMenu(\'' + data.id + '\')" style="cursor: pointer; margin-left: 5px;" class="glyphicon glyphicon-' + (data.menu == 1 ? 'check' : 'unchecked') + '" />' %>
-        </div>
-    </td>
-    <td class="text-center" style="vertical-align: middle">
         <input type="text" onchange="newscategory.changePosition('<%= data.id %>');" rel-data="<%= data.id %>" class="text-center" value="<%= data.position %>" size="4">
     </td>
     <td class="text-center" style="vertical-align: middle">

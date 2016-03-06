@@ -8,16 +8,16 @@ use common\models\output\Response;
 use Yii;
 
 class AuthController extends ServiceController {
-
+    // $this->layout = '';
     public function init() {
         parent::init();
     }
-
     /**
      * 
      * @return type
      */
     public function actionSignin() {
+
         if (Yii::$app->user->getId() != null) {
             return $this->response(new Response(true, "Admin account logged in the system", "#index/grid"));
         }
@@ -27,7 +27,8 @@ class AuthController extends ServiceController {
         if ($resp->success) {
             $auth = new Auth();
             $auth->id = $resp->data->id;
-            $auth->authKey = md5($resp->data->id . "-bapcai.vn29-" . $resp->data->joinTime);
+            $auth->username = $resp->data->username;
+            $auth->authKey = md5($resp->data->id . "-lapdx-" . $resp->data->username);
             Yii::$app->user->login($auth, 1);
         }
         return $this->response($resp);

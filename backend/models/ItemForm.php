@@ -18,19 +18,14 @@ class ItemForm extends Model {
     public $startPrice;
     public $sellPrice;
     public $categoryId;
-    public $partnersId;
-    public $type;
-    public $noise;
-    public $power;
-    public $origin;
-    public $gift;
+    public $author;
 
     public function rules() {
         return [
-            [['name', 'description', 'sellPrice', 'startPrice', 'categoryId', 'origin', 'partnersId', 'power'], 'required', 'message' => "{attribute} không được để trống"],
-            [['description', 'content'], 'string', 'message' => "{attribute} phải là ký tự"],
-            [['active', 'id', 'sellPrice', 'startPrice', 'partnersId', 'type','noise', 'power'], 'integer', 'message' => "{attribute} phải là số"],
-            [['name', 'origin','gift'], 'string', 'message' => "{attribute} phải là ký tự", 'max' => 255, 'tooLong' => "{attribute} tối đa là 255 ký tự"]
+            [['name', 'description', 'sellPrice', 'startPrice', 'categoryId','author'], 'required', 'message' => "{attribute} không được để trống"],
+            [['description', 'content','author'], 'string', 'message' => "{attribute} phải là ký tự"],
+            [['active', 'id', 'sellPrice', 'startPrice'], 'integer', 'message' => "{attribute} phải là số"],
+            [['name'], 'string', 'message' => "{attribute} phải là ký tự", 'max' => 255, 'tooLong' => "{attribute} tối đa là 255 ký tự"]
         ];
     }
 
@@ -40,18 +35,11 @@ class ItemForm extends Model {
             'name' => 'Tên',
             'description' => 'Mô tả',
             'content' => 'Nội dung',
-            'property' => 'Thuộc tính',
-            'about' => 'Thông tin',
             'active' => 'Trạng thái',
             'sellPrice' => 'Giá bán',
             'startPrice' => 'Giá gốc',
             'categoryId' => 'Danh mục',
-            'power' => 'Công suất',
-            'type' => 'Loại bếp',
-            'partnersId' => 'Hãng sản xuất',
-            'origin' => 'Xuất xứ',
-            'gift' => 'Quà tặng',
-            'noise' => 'Độ ồn',
+            'author' => 'Tác giả',
         ];
     }
 
@@ -66,9 +54,8 @@ class ItemForm extends Model {
             $item->createTime = time();
         }
         $item->name = $this->name;
+        $item->author = $this->author;
         $item->description = $this->description;
-        $item->gift = $this->gift;
-        $item->noise = $this->noise;
         $item->sellPrice = $this->sellPrice;
         $item->startPrice = $this->startPrice;
         $cat = CategoryBusiness::get($this->categoryId);
@@ -77,10 +64,6 @@ class ItemForm extends Model {
         }
         $item->categoryId = $this->categoryId;
         $item->categoryName = $cat->name;
-        $item->origin = $this->origin;
-        $item->partnersId = $this->partnersId;
-        $item->power = $this->power;
-        $item->type = $this->type;
         $item->active = $this->active == 1 ? 1 : 0;
         $item->updateTime = time();
 
