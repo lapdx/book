@@ -27,10 +27,10 @@ class IndexController extends BaseController {
             $this->meta($meta->title, $meta->description, $this->baseUrl, isset($this->var['home']->logo[0]) ? $this->var['home']->logo[0] : '', $meta->keyword);
         }
         return $this->render('index', [
-                    'boxs' => $hot,
-                    'sell' => $sell,
-                    'heart' => $heart
-        ]);
+            'boxs' => $hot,
+            'sell' => $sell,
+            'heart' => $heart
+            ]);
     }
 
     public function actionSearch() {
@@ -45,8 +45,8 @@ class IndexController extends BaseController {
             $this->meta($meta->title, $meta->description, $this->baseUrl, isset($this->var['home']->logo[0]) ? $this->var['home']->logo[0] : '', $meta->keyword);
         }
         return $this->render('search', [
-                    'dataPage' => $dataPage,
-        ]);
+            'dataPage' => $dataPage,
+            ]);
     }
 
     public function actionPhp() {

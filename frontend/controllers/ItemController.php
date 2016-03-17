@@ -82,7 +82,7 @@ class ItemController extends BaseController {
     public function actionCategory() {
         $category = CategoryBusiness::getAll(true);
         $this->var['item'] = 1;
-        return $this->render("category", [
+        return $this->render('category.php', [
                     'category' => $category,
         ]);
     }
