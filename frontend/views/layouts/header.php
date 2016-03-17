@@ -15,7 +15,7 @@ use yii\helpers\Html;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Supertrung Book</title>
 
-  <meta name="description" content="" />
+  <meta name="description" content="Tesst" />
   <meta name="keywords" content="" />
   <meta property="og:title" content="" />
   <meta property="og:description" content="" />
