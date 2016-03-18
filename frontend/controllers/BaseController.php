@@ -29,7 +29,7 @@ class BaseController extends Controller {
         parent::init();
         $this->baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . str_replace("index.php", '', $_SERVER['SCRIPT_NAME']);
         $this->mDefault();
-        $this->home();
+        // $this->home();
         $this->var['browse'] = 0;
         $this->var['index'] = 0;
         $this->var['new'] = 0;
