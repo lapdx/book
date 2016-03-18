@@ -131,3 +131,102 @@ user.setRole = function (_email) {
         }
     });
 };
+user.remove = function (id) {
+    popup.confirm("Bạn có chắc chắn muốn xóa người dùng này?", function () {
+        ajax({
+            service: '/user/remove',
+            data: {id: id},
+            loading: false,
+            done: function (resp) {
+                if (resp.success) {
+                    $('tr[data-key=' + id + ']').addClass('danger');
+                } else {
+                    popup.msg(resp.message);
+                }
+            }
+        });
+    });
+};
+
+user.add = function () {
+    popup.open('popup-add-user', 'Thêm mới người dùng.', Fly.template('/user/form.tpl'), [
+        {
+            title: 'Thêm mới',
+            style: 'btn-primary',
+            loading: false,
+            fn: function () {
+                ajaxSubmit({
+                    service: '/user/save',
+                    id: 'add-user',
+                    contentType: 'json',
+                    loading: false,
+                    done: function (rs) {
+                        if (rs.success) {
+                            var html = Fly.template('/user/row.tpl', rs);
+                            $('#mytable tbody[rel-data="bodydata"]').prepend(html);
+                            popup.close('popup-add-user');
+                        } else {
+                            popup.msg(rs.message);
+                        }
+                    }
+                });
+                $('#popup-add-user').removeAttr('style');
+                $('#popup-add-user').attr('style', 'position: absolute;overflow: visible;display:block');
+
+            }
+        },
+        {
+            title: 'Hủy',
+            style: 'btn-default',
+            fn: function () {
+                popup.close('popup-add-user');
+            }
+        }
+    ]);
+};
+
+user.edit = function(id) {
+    ajax({
+        service: '/user/getbyid',
+        loading: false,
+        data: {id: id},
+        done: function(resp) {
+            if (resp.success) {
+                popup.open('popup-edit-news', 'Sửa người dùng.', Fly.template('/user/form.tpl', resp), [
+                    {
+                        title: 'Sửa',
+                        style: 'btn-primary',
+                        fn: function() {
+                            ajaxSubmit({
+                                service: '/user/save',
+                                id: 'add-user',
+                                contentType: 'json',
+                                loading: false,
+                                done: function(rs) {
+                                    if (rs.success) {
+                                           var html = Fly.template('/user/row.tpl', rs);
+                                          var stt = $("tr[data-key='"+id+"'] td.stt").text()
+                                           $("tr[data-key='"+id+"']").replaceWith(html);
+                                           $("tr[data-key='"+id+"'] td.stt").text(stt);
+                                            popup.close('popup-edit-news');
+                                    } else {
+                                        popup.msg(rs.message);
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    {
+                        title: 'Hủy',
+                        style: 'btn-default',
+                        fn: function() {
+                            popup.close('popup-edit-news');
+                        }
+                    }
+                ]);
+            } else {
+                popup.msg(resp.message);
+            }
+        }
+    });
+};

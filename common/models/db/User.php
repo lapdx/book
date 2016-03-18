@@ -19,6 +19,9 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+    const TYPE_CUSTOMER = 'customer';
+    const TYPE_ADMIN = 'admin';
+
     /**
      * @inheritdoc
      */

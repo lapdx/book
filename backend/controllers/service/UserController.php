@@ -3,6 +3,7 @@
 namespace backend\controllers\service;
 
 use backend\models\AssignmentForm;
+use backend\models\UserForm;
 use common\models\business\UserBusiness;
 use common\models\db\User;
 use common\models\input\UserSearch;
@@ -39,6 +40,15 @@ class UserController extends ServiceController {
         $id = Yii::$app->request->get('id');
         return $this->response(UserBusiness::changeActive($id));
     }
+
+    public function actionRemove() {
+        if (is_object($resp = $this->can("remove"))) {
+            return $this->response($resp);
+        }
+        $id = Yii::$app->request->get('id');
+        return $this->response(UserBusiness::remove($id));
+    }
+
     /**
      * Assignment admin system
      * @return type
@@ -50,6 +60,24 @@ class UserController extends ServiceController {
         $form = new AssignmentForm();
         $form->setAttributes($form->setAttributes(Yii::$app->request->getBodyParams()));
         return $this->response($form->save());
+    }
+
+    public function actionSave() {
+        if (is_object($resp = $this->can("save"))) {
+            return $this->response($resp);
+        }
+        $form = new UserForm();
+        $form->setAttributes(Yii::$app->request->getBodyParams());
+
+        return $this->response($form->save());
+    }
+
+    public function actionGetbyid() {
+        if (is_object($resp = $this->can("getbyid"))) {
+            return $this->response($resp);
+        }
+        $id = Yii::$app->request->get('id');
+        return $this->response(new Response(true, "Lấy dữ liệu thành công", UserBusiness::get($id)));
     }
 
 }

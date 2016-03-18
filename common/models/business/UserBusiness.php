@@ -19,8 +19,11 @@ class UserBusiness {
         return User::findOne($id);
     }
 
-    public static function getByLogin($username,$password,$type='admin'){
-        return User::find()->andWhere(['=','username',$username])->andWhere(['=','password',$password])->andWhere(['=','type',$type])->one();
+    public static function getByLogin($username, $password, $type = 'admin') {
+        return User::find()->andWhere(['=', 'username', $username])->andWhere(['=', 'password', $password])->andWhere(['=', 'type', $type])->one();
+    }
+    public static function getByUsername($username,$id) {
+        return User::find()->andWhere(['=', 'username', $username])->andWhere(['<>', 'id', $id])->one();
     }
 
     /**
@@ -51,16 +54,17 @@ class UserBusiness {
             $auth->revoke($auth->getRole('superadmin'), $id);
         }
         $admin->delete();
-        return new Response(true, "Tài khoản " . $admin->id . " đã được xóa khỏi hệ thống");
+        return new Response(true, "Tài khoản " . $admin->username . " đã được xóa khỏi hệ thống");
     }
 
-    /**
-     * 
-     * @param Administrator $admin
-     * @return type
-     */
-    public static function getCode(Administrator $admin) {
-        return md5(trim(TextUtils::removeMarks($admin->id . "-" . $admin->joinTime)));
+    public static function resetPassword($id) {
+        $admin = self::get($id);
+        if ($admin == null) {
+            return new Response(false, "User don't exits", []);
+        }
+        $admin->password = md5("123456lapdx");
+        $admin->save();
+        return new Response(true, "Password  account ".$admin->username." is 123456", $admin);
     }
 
 }
