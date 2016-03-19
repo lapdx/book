@@ -67,7 +67,11 @@ class Item extends \yii\db\ActiveRecord
         ];
     }
 
-    public function attributes() {
-        return array_merge(parent::attributes(), ['images']);
+    // public function attributes() {
+    //     return array_merge(parent::attributes(), ['images']);
+    // }
+
+    public function getImages(){
+        return $this->hasMany(Image::className(), ['targetId' => 'id']);
     }
 }

@@ -60,4 +60,12 @@ class Category extends \yii\db\ActiveRecord {
         return array_merge(parent::attributes(), ['images']);
     }
 
+    public function getSubCategory(){
+        return $this->hasMany(Category::className(), ['parentId' => 'id']); 
+    }
+
+    public function getParentCategory(){
+        return $this->hasOne(Category::className(), ['id' => 'parentId']); 
+    }
+
 }

@@ -52,4 +52,7 @@ class Image extends \yii\db\ActiveRecord {
         ];
     }
 
+    public function getItem(){
+        return $this->hasOne(Item::className(), ['id' => 'targetId']); 
+    }
 }
