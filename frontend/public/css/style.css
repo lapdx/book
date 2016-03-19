@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-	width: 1240px;
+	/*width: 1240px;*/
 }
 
 .bg-black {
@@ -199,6 +199,7 @@ body {
 #owl-slider .owl-item .item img {
 	display: block;
 	max-width: 100%;
+	width: 100%;
 }
 
 .main_block_section .carousel .carousel-item {
@@ -296,14 +297,18 @@ body {
 	box-shadow: 0 4px 4px rgba(0,0,0,.08);
 }
 .cc-products-title {
-	font-size: 20px;
-	text-transform: uppercase;
-	text-align: center;
-	font-weight: bold;
+	margin: 20px 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: bold;
+    color: #707070;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 #service_left {
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 
 #service_info_left {
@@ -317,12 +322,15 @@ body {
 #service_info_left img {
 	display: block;
 	max-width: 100%;
+	width: 100%;
 }
 
 .service_info_right p {
 	background-color: #fff;
 }
-
+#service_info_right{
+	padding: 0px 20px;
+}
 
 /* Product Content */
 .b-breadcrumb {
@@ -681,11 +689,25 @@ body {
 @media only screen and (min-width: 993px) {
 
 	.container {
-		width: 1240px!important;
+		width: 90%!important;
 	}
 
 }
 
 a:hover, a:focus{
 	text-decoration: none !important;
+}
+.nav-category ul li a.active{
+	color: #039be5;
+}
+.breadcrumb{
+	padding: 0px;
+}
+.product-item-category {
+    margin-bottom: 30px;
+    padding: 26px 20px 15px;
+    background-color: #ffffff;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 1px 2px #cccccc;
 }

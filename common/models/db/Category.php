@@ -67,5 +67,18 @@ class Category extends \yii\db\ActiveRecord {
     public function getParentCategory(){
         return $this->hasOne(Category::className(), ['id' => 'parentId']); 
     }
-
+    public function getItems(){
+        return $this->hasMany(Item::className(), ['categoryId' => 'id']); 
+    }
+    public function getAllItem(){
+        if(!empty($this->subCategory)){
+            $data = $this->items;
+            foreach ($this->subCategory as $category) $data = array_merge($data,$category->getAllItem());
+            return $data;
+        }else return $this->items;
+    }
+    public function getTopParentCategory(){
+        if($this->parentId == 0) return $this;
+        else return $this->parentCategory->getTopParentCategory();
+    }
 }

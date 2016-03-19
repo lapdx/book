@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-
+use yii\helpers\Url;
 ?>
 
 <!DOCTYPE html>
@@ -55,12 +55,12 @@ use yii\helpers\Html;
         <div class="row">
           <div class="col s12 m4 l2">
             <div class="logo">
-              <a href="./">
+              <a href="<?=Url::home()?>">
                 <?=Html::img('@web/images/logo-white.png', ['class'=>'logo-responsive'])?>
               </a>
             </div>
           </div>
-          <div class="col s6 m6 l6">
+          <div class="col s12 m6 l6">
             <!--  -->
             <nav>
              <div class="nav-wrapper">
@@ -73,7 +73,7 @@ use yii\helpers\Html;
             </div>
           </nav>
         </div>
-        <div class="col s6 m2 l4">
+        <div class="col s12 m2 l4">
           <div class="cart-mini right">
             <div class="cart-mini-button">
               <a class="waves-effect waves-light" href="#"><i class="material-icons">shopping_cart</i><span class="item_cart">0 Sản phẩm</span></a>

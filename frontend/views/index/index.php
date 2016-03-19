@@ -7,7 +7,7 @@ use yii\helpers\Url;
 <div class="main_features_section">
     <div class="container">
         <div class="row">
-            <div class="col s6 m6 l2">
+            <div class="col s12 m6 l2">
                 <div class="mega_menu">
                     <ul class="parent-menu">
                         <?php foreach($categories as $category):?>
@@ -18,7 +18,7 @@ use yii\helpers\Url;
                                     <a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a>
                                     <ul class="submenu">
                                         <?php foreach($category->subCategory as $item):?>
-                                            <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($item->name)?></a></li>
+                                            <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $item->id])?>"><?=Html::encode($item->name)?></a></li>
                                         <?php endforeach?>
                                     </ul>
                                 </li>
@@ -26,7 +26,7 @@ use yii\helpers\Url;
                         </ul>
                     </div>
                 </div>
-                <div class="col s6 m6 l9">
+                <div class="col s12 m6 l9">
                     <div class="banner_home">
                         <div id="owl-slider" class="owl-carousel owl-theme">
                             <div class="item"> <a href="#"><?=Html::img('@web/images/1.jpg')?></a> </div>
@@ -35,7 +35,7 @@ use yii\helpers\Url;
                         </div>
                     </div>
                 </div>
-                <div class="col s6 m6 l3">
+                <div class="col s12 m6 l3">
                     <div class="banner_right">
                         <a href="#"><?=Html::img('@web/images/slider_banner_top.jpg')?></a>
                     </div>
@@ -54,8 +54,7 @@ use yii\helpers\Url;
                     <?php foreach($new_items as $item):?>
                         <div class="carousel-item">
                             <div class="product-item">
-                                <?php if(empty($item->images)) echo Html::img('@web/images/toi-tai-gioi-ban-cung-the-2--1-.jpg');
-                                else echo Html::img('@web/'.$item->images[0]->imageId)?>
+                                <?=Html::img('@web/'.$item->getThumbnailImageUrl())?>
                                 <?= Html::a(Html::encode($item->name), ['item/detail', 'id' => $item->id], ['class' => 'product-item-name']) ?>
                                 <?php if($item->sellPrice != $item->startPrice):?>
                                     <span class="product-item-price-sale"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
@@ -76,8 +75,7 @@ use yii\helpers\Url;
                     <?php foreach($sale_items as $item):?>
                         <div class="carousel-item">
                             <div class="product-item">
-                                <?php if(empty($item->images)) echo Html::img('@web/images/toi-tai-gioi-ban-cung-the-2--1-.jpg');
-                                else echo Html::img('@web/'.$item->images[0]->imageId)?>
+                                <?=Html::img('@web/'.$item->getThumbnailImageUrl())?>
                                 <?= Html::a(Html::encode($item->name), ['item/detail', 'id' => $item->id], ['class' => 'product-item-name']) ?>
                                 <?php if($item->sellPrice != $item->startPrice):?>
                                     <span class="product-item-price-sale"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
