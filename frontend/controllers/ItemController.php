@@ -16,6 +16,7 @@ use Yii;
 
 class ItemController extends BaseController {
 
+    public $enableCsrfValidation = false;
     public function actionIndex() {
         $search = new ItemSearch();
         $search->setAttributes(Yii::$app->request->get());
@@ -63,8 +64,8 @@ class ItemController extends BaseController {
     }
 
     public function actionDetail() {
-        $id             = Yii::$app->request->get('id');
-        $item           = Item::findOne(['id'=>$id]);
+        $id     = Yii::$app->request->get('id');
+        $item   = Item::findOne(['id'=>$id]);
         
         return $this->render("detail", [
             'item' => $item,
@@ -81,7 +82,27 @@ class ItemController extends BaseController {
             'categories' => $categories,
             ]);
     }
-    public function getHotdeal(){
-        return $this->hasMany(Hotdealbox::className(), ['itemId' => 'id']); 
+    public function actionAdd_to_cart(){
+        $id         = Yii::$app->request->post('id');
+        $quantity   = Yii::$app->request->post('quantity');
+        $type       = Yii::$app->request->post('type');
+        $session    = Yii::$app->session;
+        $cart       = $session['cart'];
+        if($type == 'update') $cart[$id] = $quantity;
+        elseif($type == 'add'){
+            if(array_key_exists($id, $cart)) $cart[$id] += $quantity;
+            else $cart[$id] = $quantity;
+        }
+        $data['bill'] = 0;
+        $data['total'] = 0;
+        foreach ($cart as $key => $value) {
+            $data['total'] += $value;
+            $data['bill'] += Item::getSellPrice($key) * $value;
+        }
+        $session['total']   = $data['total'];
+        $session['bill']    = number_format($data['bill'],0,',','.');        
+        $session['cart']    = $cart; 
+        echo json_encode($data);
     }
+    
 }

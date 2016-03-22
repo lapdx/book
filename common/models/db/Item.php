@@ -82,4 +82,10 @@ class Item extends \yii\db\ActiveRecord
         if($image) return $image->imageId;
         else return 'images/toi-tai-gioi-ban-cung-the-2--1-.jpg';
     }
+    public function getHotdeal(){
+        return $this->hasMany(Hotdealbox::className(), ['itemId' => 'id']); 
+    }
+    public static function getSellPrice($id){
+        return static::findOne(['id'=>$id])->sellPrice;
+    }
 }

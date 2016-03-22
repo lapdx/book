@@ -44,7 +44,7 @@ use yii\helpers\Url;
                             <?php if($item->sellPrice != $item->startPrice) echo number_format($item->sellPrice,0,',','.').'đ <span>'.number_format($item->startPrice,0,',','.').'đ </span>';else echo number_format($item->sellPrice,0,',','.').'đ'?>
                         </p>
                         <p class="product-description"><?=substr($item->content,0,560).'...'?><a href="#">Xem thêm</a></p>              
-                        <a class="product-item-cart add_to_cart" href="#"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>
+                        <a class="product-item-cart add_to_cart" id="add_to_cart" data-id="<?=$item->id?>"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>
                     </div>
                 </div>
             </div>
@@ -83,10 +83,10 @@ use yii\helpers\Url;
                                     <span class="product-item-name"><?=Html::encode($relative->name)?></span>
                                 </a>
                                 <?php if($relative->sellPrice != $relative->startPrice):?>
-                                    <span class="product-item-price-sale"><?=number_format($relative->sellPrice,0,',','.')?>đ</span> 
+                                    <span class="product-item-price-sale"><?=number_format($relative->startPrice,0,',','.')?>đ</span> 
                                 <?php endif?>
-                                <span class="product-item-price"><?=number_format($relative->startPrice,0,',','.')?>đ</span>
-                                <a class="product-item-cart add_to_cart waves-effect waves-light" href="#"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>         
+                                <span class="product-item-price"><?=number_format($relative->sellPrice,0,',','.')?>đ</span>
+                                <a class="product-item-cart add_to_cart waves-effect waves-light" id="add_to_cart" data-id="<?=$item->id?>"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>         
                             </div>
                         </div>  
                     </div>
@@ -94,3 +94,26 @@ use yii\helpers\Url;
             </div>
         </div>
     </div>
+    <script>
+        $(function(){
+            $('a#add_to_cart').click(function(){
+                $.ajax({
+                    url: '<?=Yii::$app->homeUrl?>item/add_to_cart',
+                    method: 'POST',
+                    data: {
+                        id: $(this).data('id'),
+                        quantity: 1,
+                        type: 'add',
+                    }
+                })
+                .done(function(data) {
+                    data = JSON.parse(data);
+                    Materialize.toast('Bạn đã thêm sản phẩm vào giỏ hàng thành công!', 4000)
+                    $('.item_cart').text(data.total);
+                })
+                .fail(function() {
+                    console.log("error");
+                });
+            })            
+        })
+    </script>

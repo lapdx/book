@@ -66,22 +66,49 @@ use yii\helpers\Url;
                 </div>
             </div>
             <div class="col s12 m6 l9 content-category">
-            <?php if(!empty($main_category->getAllItem())):foreach($main_category->getAllItem() as $item):?>
+            <?php if(!empty($main_category->getAllItem())):$i=0;foreach($main_category->getAllItem() as $item):
+            if($i%3 == 0) echo '<div class="row">';?>
                     <div class="col s12 m6 l4">
-                        <div class="product-item">
-                            <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
-                                <?= Html::img('@web/'.$item->getThumbnailImageUrl())?>
-                                <span class="product-item-name"><?=Html::encode($item->name)?></span>
-                            </a>
-                            <?php if($item->sellPrice != $item->startPrice):?>
-                                <span class="product-item-price-sale"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
-                            <?php endif?> 
-                            <span class="product-item-price"><?=number_format($item->startPrice,0,',','.')?>đ</span>
-                            <a class="product-item-cart add_to_cart waves-effect waves-light" href="#"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>         
+                        <div class="product-item-category">
+                            <div class="product-item">
+                                <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
+                                    <?= Html::img('@web/'.$item->getThumbnailImageUrl())?>
+                                    <span class="product-item-name"><?=Html::encode($item->name)?></span>
+                                </a>
+                                <?php if($item->sellPrice != $item->startPrice):?>
+                                    <span class="product-item-price-sale"><?=number_format($item->startPrice,0,',','.')?>đ</span>
+                                <?php endif?> 
+                                <span class="product-item-price"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
+                                <a class="product-item-cart add_to_cart waves-effect waves-light" id="add_to_cart" data-id="<?=$item->id?>"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>         
+                            </div>
                         </div>
                     </div>
+                    <?php $i++;if($i%3 == 0) echo '</div>';?>
                 <?php endforeach;endif?>
             </div>
         </div>
     </div>
 </div>
+<script>
+    $(function(){
+            $('a#add_to_cart').click(function(){
+                $.ajax({
+                    url: '<?=Yii::$app->homeUrl?>item/add_to_cart',
+                    method: 'POST',
+                    data: {
+                        id: $(this).data('id'),
+                        quantity: 1,
+                        type: 'add',
+                    }
+                })
+                .done(function(data) {
+                    data = JSON.parse(data);
+                    Materialize.toast('Bạn đã thêm sản phẩm vào giỏ hàng thành công!', 4000)
+                    $('.item_cart').text(data.total);
+                })
+                .fail(function() {
+                    console.log("error");
+                });
+            })            
+        })
+</script>

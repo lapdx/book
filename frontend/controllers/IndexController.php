@@ -29,7 +29,19 @@ class IndexController extends BaseController {
             'sale_items' => $sale_items,
             ]);
     }
-
+    public function actionCart(){
+        $cart = array('item'=>array(),'bill'=>0);
+        foreach (Yii::$app->session['cart'] as $key => $value){
+            $item = Item::findOne(['id'=>$key]);
+            $cart['item'][] = array('item'=>$item,'quantity'=>$value); 
+            $cart['bill'] += Item::getSellPrice($key)*$value;
+        } 
+        return $this->render('cart', [
+            'cart' => $cart,
+            // 'new_items'  => $new_items,
+            // 'sale_items' => $sale_items,
+            ]);
+    }
     public function actionSearch() {
         $keyword = Yii::$app->request->get('keyword');
         $search = new ItemSearch();
@@ -48,6 +60,9 @@ class IndexController extends BaseController {
 
     public function actionPhp() {
         phpinfo();
+    }
+    public function actionTest(){
+        echo Item::getSellPrice(4);
     }
 
 }
