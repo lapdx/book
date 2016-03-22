@@ -8,10 +8,15 @@ use common\models\business\MetaBusiness;
 use common\models\enu\MetaType;
 use common\models\input\ItemSearch;
 use common\util\UrlUtils;
+use common\models\db\Category;
+use common\models\db\Item;
+use common\models\db\Hotdealbox;
 use Yii;
+
 
 class ItemController extends BaseController {
 
+    public $enableCsrfValidation = false;
     public function actionIndex() {
         $search = new ItemSearch();
         $search->setAttributes(Yii::$app->request->get());
@@ -52,39 +57,52 @@ class ItemController extends BaseController {
             $this->meta($meta->title, $meta->description, $this->baseUrl.UrlUtils::browse($alias), isset($cat->images[0]) ? $cat->images[0] : $this->baseUrl.'data/bep-tu-giovani-g-252t.jpg', $meta->keyword);
         }
         return $this->render("browse", [
-                    'dataPage' => $dataPage,
-                    'category' => $cat,
-                    'orderby' => $orderby,
-        ]);
+            'dataPage' => $dataPage,
+            'category' => $cat,
+            'orderby' => $orderby,
+            ]);
     }
 
     public function actionDetail() {
-        $id = \Yii::$app->request->get('id');
-        $item = ItemBusiness::getWithImage($id);
-        $search = new ItemSearch();
-        $search->setAttributes(Yii::$app->request->get());
-        $search->pageSize = 7;
-        $search->categoryId = $item->categoryId;
-        $search->page = 1;
-        $search->active = 1;
-        $items = $search->search(true)->data;
-        $this->var['item'] = 1;
-        $meta = MetaBusiness::getByObj(MetaType::ITEM, $item->id);
-        if (!empty($meta)) {
-            $this->meta($meta->title, $meta->description, $this->baseUrl.UrlUtils::item($item->name, $item->id), isset($item->images[0]) ? $item->images[0] : '', $meta->keyword);
-        }
+        $id     = Yii::$app->request->get('id');
+        $item   = Item::findOne(['id'=>$id]);
+        
         return $this->render("detail", [
-                    'items' => $items,
-                    'detail' => $item
-        ]);
+            'item' => $item,
+            // 'best_seller' => $best_seller
+            ]);
     }
 
     public function actionCategory() {
-        $category = CategoryBusiness::getAll(true);
-        $this->var['item'] = 1;
-        return $this->render("category", [
-                    'category' => $category,
-        ]);
+        $id         = Yii::$app->request->get('id');
+        $category   = Category::findOne(['id'=>$id]);     
+        $categories = Category::findAll(['parentId'=>0]);
+        return $this->render('category.php', [
+            'main_category' => $category,
+            'categories' => $categories,
+            ]);
     }
-
+    public function actionAdd_to_cart(){
+        $id         = Yii::$app->request->post('id');
+        $quantity   = Yii::$app->request->post('quantity');
+        $type       = Yii::$app->request->post('type');
+        $session    = Yii::$app->session;
+        $cart       = $session['cart'];
+        if($type == 'update') $cart[$id] = $quantity;
+        elseif($type == 'add'){
+            if(array_key_exists($id, $cart)) $cart[$id] += $quantity;
+            else $cart[$id] = $quantity;
+        }
+        $data['bill'] = 0;
+        $data['total'] = 0;
+        foreach ($cart as $key => $value) {
+            $data['total'] += $value;
+            $data['bill'] += Item::getSellPrice($key) * $value;
+        }
+        $session['total']   = $data['total'];
+        $session['bill']    = number_format($data['bill'],0,',','.');        
+        $session['cart']    = $cart; 
+        echo json_encode($data);
+    }
+    
 }
