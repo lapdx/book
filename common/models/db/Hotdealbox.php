@@ -45,11 +45,19 @@ class Hotdealbox extends \yii\db\ActiveRecord {
     }
 
     /**
-     * 
+     *
      * @return type
      */
     public function attributes() {
         return array_merge(parent::attributes(), ['item']);
     }
-
+    public function getBook(){
+        return Item::findOne(['id'=>$this->itemId]);
+    }
+    public static function getSelling(){
+        return static::findAll(['type'=>'selling']);
+    }
+    public static function getHot(){
+        return static::findAll(['type'=>'hot']);
+    }
 }
