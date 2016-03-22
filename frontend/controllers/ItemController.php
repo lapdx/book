@@ -66,7 +66,6 @@ class ItemController extends BaseController {
     public function actionDetail() {
         $id     = Yii::$app->request->get('id');
         $item   = Item::findOne(['id'=>$id]);
-        
         return $this->render("detail", [
             'item' => $item,
             // 'best_seller' => $best_seller
@@ -75,11 +74,13 @@ class ItemController extends BaseController {
 
     public function actionCategory() {
         $id         = Yii::$app->request->get('id');
-        $category   = Category::findOne(['id'=>$id]);     
+        $category   = Category::findOne(['id'=>$id]);
         $categories = Category::findAll(['parentId'=>0]);
+        $selling    = Hotdealbox::getSelling();
         return $this->render('category.php', [
             'main_category' => $category,
             'categories' => $categories,
+            'selling'   => $selling
             ]);
     }
     public function actionAdd_to_cart(){
@@ -100,9 +101,9 @@ class ItemController extends BaseController {
             $data['bill'] += Item::getSellPrice($key) * $value;
         }
         $session['total']   = $data['total'];
-        $session['bill']    = number_format($data['bill'],0,',','.');        
-        $session['cart']    = $cart; 
+        $session['bill']    = number_format($data['bill'],0,',','.');
+        $session['cart']    = $cart;
         echo json_encode($data);
     }
-    
+
 }

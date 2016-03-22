@@ -61,14 +61,14 @@ class Category extends \yii\db\ActiveRecord {
     }
 
     public function getSubCategory(){
-        return $this->hasMany(Category::className(), ['parentId' => 'id']); 
+        return $this->hasMany(Category::className(), ['parentId' => 'id']);
     }
 
     public function getParentCategory(){
-        return $this->hasOne(Category::className(), ['id' => 'parentId']); 
+        return $this->hasOne(Category::className(), ['id' => 'parentId']);
     }
     public function getItems(){
-        return $this->hasMany(Item::className(), ['categoryId' => 'id']); 
+        return $this->hasMany(Item::className(), ['categoryId' => 'id']);
     }
     public function getAllItem(){
         if(!empty($this->subCategory)){

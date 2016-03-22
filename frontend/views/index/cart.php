@@ -4,7 +4,7 @@ use yii\helpers\Url;
 ?>
 
 <div class="product_content">
-	<div class="container margin-bottom-20">	
+	<div class="container margin-bottom-20">
 		<nav class="b-breadcrumb">
 			<div class="nav-wrapper">
 				<div class="col s12">
@@ -14,9 +14,9 @@ use yii\helpers\Url;
 			</div>
 		</nav>
 		<div class="text-center">
-			<?php if(empty($cart)):?>
+			<?php if(empty($cart['item'])):?>
 				<h2 class="cc-products-title">Không có sản phẩm nào</h2>
-				<a class="comment-submit" href="#">Tiếp tục mua sắm</a>
+				<a class="comment-submit" href="<?=Url::home()?>">Tiếp tục mua sắm</a>
 			<?php else:?>
 				<div class="cart-table">
 					<div class="table-responsive">
@@ -41,11 +41,11 @@ use yii\helpers\Url;
 											<a href="<?=Url::toRoute(['item/detail', 'id' => $item['item']->id])?>"><?=Html::encode($item['item']->name)?></a>
 										</td>
 										<td><?=number_format($item['item']->sellPrice,0,',','.')?>đ</td>
-										<td><input type="number" class="item_cart" value="<?=$item['quantity']?>" id="quantity" data-id="<?=$item['item']->id?>"></td>
-										<td>
+										<td><input type="number" class="item_cart" value="<?=$item['quantity']?>" id="quantity" data-id="<?=$item['item']->id?>" data-price="<?=$item['item']->sellPrice?>"></td>
+										<td id="output<?=$item['item']->id?>">
 											<?=number_format($item['quantity']*$item['item']->sellPrice,0,',','.')?>đ
 										</td>
-										<td><a href=""><i class="material-icons">delete</i></a></td>
+										<td><a href="<?=Url::toRoute(['index/remove_item', 'id' => $item['item']->id])?>" id="remove_item"><i class="material-icons">delete</i></a></td>
 									</tr>
 								<?php endforeach?>
 								<tr>
@@ -58,10 +58,10 @@ use yii\helpers\Url;
 								<tr>
 									<td colspan="6">
 										<div class="left">
-											<a class="comment-submit" href="#">Tiếp tục mua sắm</a>
+											<a class="comment-submit" href="<?=Url::home()?>">Tiếp tục mua sắm</a>
 										</div>
 										<div class="right">
-											<a class="comment-submit" href="#">Hủy giỏ hàng</a>
+											<a class="comment-submit" href="<?=Url::toRoute(['index/remove_cart'])?>">Hủy giỏ hàng</a>
 											<a class="comment-submit" href="#">Thanh toán</a>
 										</div>
 									</td>
@@ -78,6 +78,9 @@ use yii\helpers\Url;
 	$(function(){
 		$('input#quantity').change(function(){
 			if($(this).val() == '') $(this).val(0);
+			var output = $('#output'+$(this).data('id'));
+			var price = $(this).data('price') * $(this).val();
+			output.text(price.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")+'đ');
 			$.ajax({
 				url: '<?=Yii::$app->homeUrl?>item/add_to_cart',
 				method: 'POST',
@@ -89,14 +92,16 @@ use yii\helpers\Url;
 			})
 			.done(function(data) {
 				data = JSON.parse(data);
-				console.log(data);
 				Materialize.toast('Bạn đã cập nhật giỏ hàng thành công!', 4000)
 				$('.item_cart').text(data.total);
-				$('.tong_cart').text(data.bill+'đ');
+				$('.tong_cart').text(data.bill.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")+'đ');
 			})
 			.fail(function() {
 				console.log("error");
-			});  
+			});
+		})
+		$('#remove_item').click(function(){
+			return(confirm('Bạn có chắc chắn muốn xoá sản phẩm này không?'));
 		})
 	})
 </script>

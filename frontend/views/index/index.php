@@ -109,6 +109,6 @@ use yii\helpers\Url;
                 .fail(function() {
                     console.log("error");
                 });
-            })            
+            })
         })
     </script>

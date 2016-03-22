@@ -75,7 +75,7 @@ class Item extends \yii\db\ActiveRecord
         return Image::findAll(['targetId'=>$this->id]);
     }
     public function getCategory(){
-        return $this->hasOne(Category::className(), ['id' => 'categoryId']); 
+        return $this->hasOne(Category::className(), ['id' => 'categoryId']);
     }
     public function getThumbnailImageUrl(){
         $image = Image::findOne(['targetId'=>$this->id]);
@@ -83,7 +83,7 @@ class Item extends \yii\db\ActiveRecord
         else return 'images/toi-tai-gioi-ban-cung-the-2--1-.jpg';
     }
     public function getHotdeal(){
-        return $this->hasMany(Hotdealbox::className(), ['itemId' => 'id']); 
+        return $this->hasMany(Hotdealbox::className(), ['itemId' => 'id']);
     }
     public static function getSellPrice($id){
         return static::findOne(['id'=>$id])->sellPrice;

@@ -34,3 +34,7 @@ a:hover, a:focus{
 .tong_cart{
     font-weight: bold;
 }
+.text-blue{
+    color: #3c8dbc;
+    cursor: pointer;
+}
