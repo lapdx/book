@@ -21,6 +21,9 @@ use Yii;
  * @property integer $updateTime
  */
 class OrderInfo extends \yii\db\ActiveRecord {
+    const STATUS_UNPAID = "unpaid";
+    const STATUS_PAID = "paid";
+    const STATUS_CANCEL = "cancel";
 
     /**
      * @inheritdoc
@@ -40,6 +43,7 @@ class OrderInfo extends \yii\db\ActiveRecord {
             [['name', 'email', 'address'], 'string', 'max' => 255],
             [['phone','buyerId'], 'string', 'max' => 100],
             [['paymentMethod'], 'string', 'max' => 10],
+            [['status'], 'string', 'max' => 20],
             [['note'], 'string', 'max' => 500]
         ];
     }

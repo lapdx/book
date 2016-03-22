@@ -137,6 +137,17 @@
                                     <% } %>
                                 </span>
                             </p>
+                            <p style="margin-top: 10px">Trạng thái :
+                                <span class="change-status" style="display: inline-block; float: right; text-align: right">
+                                    <% if(this.status == 'cancel'){ %>
+                                    <label class="label label-danger">Hủy đơn hàng</label>
+                                    <% }else if(this.status == 'paid'){ %>
+                                    <label class="label label-success">Đã thanh toán</label>
+                                    <% }else{ %>
+                                    <label class="label label-info">Chưa thanh toán</label>
+                                    <% } %>
+                                </span>
+                            </p>
                             <p style="margin-top: 10px">Ngày tạo :
                                 <span style="display: inline-block; float: right; text-align: right">
                                     <%= textUtils.formatTime(this.createTime,'hour') %>
@@ -153,6 +164,9 @@
                         </td>
                         <td class="text-center" style="vertical-align: middle">
                             <div class="btn-group">
+                                <button type="button" class="btn btn-success" onclick="order.changeStatus('<%= this.id %>');" >
+                                    <i class="glyphicon glyphicon-edit pull-left" style="line-height: 16px"></i>Sửa
+                                </button>
                                 <button type="button" class="btn btn-danger" onclick="order.remove('<%= this.id %>');" >
                                     <i class="glyphicon glyphicon-trash pull-left" style="line-height: 16px"></i>Xóa
                                 </button>
