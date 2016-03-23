@@ -50,6 +50,9 @@ class UserForm extends Model {
         $user = UserBusiness::get($this->id);
         if ($user == null) {
             $user = new User();
+            if (empty($this->password)) {
+                return new Response(false, "Mật khẩu không được để trống");
+            }
         }
         $u = UserBusiness::getByUsername($this->username,$this->id);
         if ($u != null) {
@@ -64,7 +67,7 @@ class UserForm extends Model {
         if (empty($this->password)) {
             $user->password = $user->password;
         } else {
-            $user->password = md5($this->password . 'lapdx');
+            $user->password = \Yii::$app->getSecurity()->generatePasswordHash($this->password);
         }
         if (!$user->save(false)) {
             return new Response(false, "Không lưu được vào csdl", $user->errors);

@@ -169,4 +169,13 @@ class OrderBusiness implements InterBusiness {
         return new Response(true, "Bạn đã thêm " . $orderItem->name . " với số lượng " . $orderItem->quantity . " vào giỏ hàng", self::getCart($cart));
     }
 
+    public static function changeStatus($id, $status) {
+        $order = self::getInfor($id);
+        $order->status = $status;
+        if (!$order->save(false)) {
+            return new Response(false, "Không cập nhật được", $order->errors);
+        }
+        return new Response(true, "Thay đổi trạng thái thành công", $order);
+    }
+
 }

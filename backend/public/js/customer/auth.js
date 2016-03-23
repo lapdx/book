@@ -3,13 +3,17 @@ var auth = {};
 auth.signin = function () {
     layout.title("Manager website");
     $("body").html("");
-    // $("body").addClass("bg-login");
     $("body").prepend(Fly.template("/auth/signin.tpl", null));
 
     setTimeout(function () {
         $('[data-click="signin"]').click(function () {
-            // auth.googleSignin();
             auth.submitForm();
+        });
+        $('#password,#username').keyup(function (e) {
+            if (e.keyCode == 13)
+            {
+                auth.submitForm();
+            }
         });
     }, 300);
 
@@ -55,9 +59,9 @@ auth.googleSignin = function () {
                                 if (rs.success) {
                                     $("div[data-rel=message]").html('<div class="alert alert-success alert-login">' + rs.message + '</div>');
                                     setTimeout(function () {
-                                        window.location.href = baseUrl ;
+                                        window.location.href = baseUrl;
 //                                        location.reload();
-}, 1000);
+                                    }, 1000);
                                 } else {
                                     $("div[data-rel=message]").html('<div class="alert alert-warning alert-login">' + rs.message + '</div>');
                                 }
@@ -65,17 +69,17 @@ auth.googleSignin = function () {
                         });
                     }
                 });
-});
-});
-}, 1);
+            });
+        });
+    }, 1);
 };
 
-auth.submitForm = function(){
+auth.submitForm = function () {
     var username = $("#username").val();
     var password = $("#password").val();
     var user = {
-        username:username,
-        password:password
+        username: username,
+        password: password
     }
     ajax({
         service: '/auth/signin',
@@ -87,7 +91,7 @@ auth.submitForm = function(){
             if (rs.success) {
                 $("#error").text(rs.message);
                 setTimeout(function () {
-                    window.location.href = baseUrl ;
+                    window.location.href = baseUrl;
                 }, 1000);
             } else {
                 $("#error").text(rs.message);
