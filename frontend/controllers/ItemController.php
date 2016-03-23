@@ -66,9 +66,10 @@ class ItemController extends BaseController {
     public function actionDetail() {
         $id     = Yii::$app->request->get('id');
         $item   = Item::findOne(['id'=>$id]);
+        $selling    = Hotdealbox::getSelling();
         return $this->render("detail", [
             'item' => $item,
-            // 'best_seller' => $best_seller
+            'selling' => $selling
             ]);
     }
 

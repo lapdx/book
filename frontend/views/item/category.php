@@ -46,50 +46,49 @@ use yii\helpers\Url;
                         </div>
                         <div class="sb-block-content sb-products">
                             <ul>
+                                <?php foreach($selling as $sell):
+                                $item = $sell->book;?>
                                 <li class="product-item-mini">
-                                    <a href="#">
-                                        <img class="pim-image" src="img/nhat-ky-hoc-lam-banh--1-.jpg">
-                                        <h3 class="pim-name">Nếu gặp người ấy</h3>
-                                        <p class="pim-description"> Cả hai im lặng một lúc, tôi...</p>
-                                        <p class="pim-price"> 65.000₫ <span> 86.000₫ </span> </p>
+                                <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
+                                        <?= Html::img('@web/'.$item->getThumbnailImageUrl(),['class'=>'pim-image'])?>
+                                        <h3 class="pim-name"><?=Html::encode($item->name)?></h3>
+                                        <p class="pim-description"><?=substr(strip_tags($item->content),0,100)?></p>
+                                        <?php if($item->sellPrice != $item->startPrice):?>
+                                            <p class="pim-price"> <?=$item->sellPrice?>₫ <span> <?=$item->startPrice?>₫ </span></p> 
+                                        <?php else:?>
+                                            <p class="pim-price"> <?=$item->sellPrice?>₫</p>
+                                        <?php endif?>
                                     </a>
                                 </li>
-                                <li class="product-item-mini">
-                                    <a href="#">
-                                        <img class="pim-image" src="img/nhat-ky-hoc-lam-banh--1-.jpg">
-                                        <h3 class="pim-name">Nếu gặp người ấy</h3>
-                                        <p class="pim-description"> Cả hai im lặng một lúc, tôi...</p>
-                                        <p class="pim-price"> 65.000₫ <span> 86.000₫ </span> </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                <?php endif?>
-            </div>
-            <div class="col s12 m6 l9 content-category">
-                <?php if(!empty($main_category->getAllItem())):$i=0;foreach($main_category->getAllItem() as $item):
-                if($item->active):
-                    if($i%3 == 0) echo '<div class="row">';?>
-                <div class="col s12 m6 l4">
-                    <div class="product-item-category">
-                        <div class="product-item">
-                            <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
-                                <?= Html::img('@web/'.$item->getThumbnailImageUrl())?>
-                                <span class="product-item-name"><?=Html::encode($item->name)?></span>
-                            </a>
-                            <?php if($item->sellPrice != $item->startPrice):?>
-                                <span class="product-item-price-sale"><?=number_format($item->startPrice,0,',','.')?>đ</span>
-                            <?php endif?>
-                            <span class="product-item-price"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
-                            <a class="product-item-cart add_to_cart waves-effect waves-light" id="add_to_cart" data-id="<?=$item->id?>"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>
-                        </div>
+                            <?php endforeach?>
+                        </ul>
                     </div>
                 </div>
-                <?php $i++;if($i%3 == 0) echo '</div>';?>
-            <?php endif;endforeach;endif?>
+            <?php endif?>
         </div>
+        <div class="col s12 m6 l9 content-category">
+            <?php if(!empty($main_category->getAllItem())):$i=0;foreach($main_category->getAllItem() as $item):
+            if($item->active):
+                if($i%3 == 0) echo '<div class="row">';?>
+            <div class="col s12 m6 l4">
+                <div class="product-item-category">
+                    <div class="product-item">
+                        <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
+                            <?= Html::img('@web/'.$item->getThumbnailImageUrl())?>
+                            <span class="product-item-name"><?=Html::encode($item->name)?></span>
+                        </a>
+                        <?php if($item->sellPrice != $item->startPrice):?>
+                            <span class="product-item-price-sale"><?=number_format($item->startPrice,0,',','.')?>đ</span>
+                        <?php endif?>
+                        <span class="product-item-price"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
+                        <a class="product-item-cart add_to_cart waves-effect waves-light" id="add_to_cart" data-id="<?=$item->id?>"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>
+                    </div>
+                </div>
+            </div>
+            <?php $i++;if($i%3 == 0) echo '</div>';?>
+        <?php endif;endforeach;endif?>
     </div>
+</div>
 </div>
 </div>
 <script>

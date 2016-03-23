@@ -45,8 +45,8 @@ $categories = Category::findAll(['parentId'=>0]);
         <div class="col-xs-12 col-md-2">
           <div id="user_do_login">
             <div class="user-actions">
-              <a href="/dang-ky">Đăng ký</a>
-              <a href="/dang-nhap/">Đăng nhập</a>
+              <a href="<?=Url::toRoute(['auth/signup'])?>">Đăng ký</a>
+              <a href="<?=Url::toRoute(['auth/'])?>">Đăng nhập</a>
             </div>
             <div class="logged"></div>
           </div>
@@ -118,7 +118,6 @@ $categories = Category::findAll(['parentId'=>0]);
               </div>
             </li>
             <li class="waves-effect waves-light"><a href="#">Giới thiệu</a></li>
-            <li class="waves-effect waves-light"><a href="#">Tin tức</a></li>
             <li class="waves-effect waves-light"><a href="#">Liên hệ</a></li>
             <span class="hotline right"><i class="material-icons">call</i><a href="tel:01688912317">Hỗ trợ: 01688912317 (24/7)</a></span>
           </ul>
@@ -141,7 +140,6 @@ $categories = Category::findAll(['parentId'=>0]);
                 </ul>
               </li>
               <li class="waves-effect waves-light"><a href="#">Giới thiệu</a></li>
-              <li class="waves-effect waves-light"><a href="#">Tin tức</a></li>
               <li class="waves-effect waves-light"><a href="#">Liên hệ</a></li>
             </ul>
           </div>

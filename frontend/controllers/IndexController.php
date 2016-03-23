@@ -20,6 +20,7 @@ class IndexController extends BaseController {
      * Trang chủ backend
      * @return type
      */
+    //Trang chủ
     public function actionIndex() {
         $categories     = Category::findAll(['parentId'=>0]);
         $new_items      = Item::find()->where('active = 1')->orderBy('createTime DESC')->limit(10)->all();
@@ -30,6 +31,7 @@ class IndexController extends BaseController {
             'sale_items' => $sale_items,
             ]);
     }
+    //Trang giỏ hàng
     public function actionCart(){
         $cart = array('item'=>array(),'bill'=>0);
         if(isset(Yii::$app->session['cart'])){
@@ -43,16 +45,25 @@ class IndexController extends BaseController {
             'cart' => $cart,
             ]);
     }
+    //Trang hủy giỏ hàng
     public function actionRemove_cart(){
         unset(Yii::$app->session['cart']);
         $this->redirect(array('/index/cart'));
     }
+    //Trang hủy item trong giỏ hàng
     public function actionRemove_item(){
         $id  = Yii::$app->request->get('id');
         $cart = Yii::$app->session['cart'];
         unset($cart[$id]);
         Yii::$app->session['cart'] = $cart;
         $this->redirect(array('/index/cart'));
+    }
+    public function actionPayment(){
+        return $this->render('payment', [
+            // 'categories' => $categories,
+            // 'new_items'  => $new_items,
+            // 'sale_items' => $sale_items,
+            ]);
     }
     public function actionSearch() {
         // $keyword = Yii::$app->request->get('keyword');
@@ -75,7 +86,6 @@ class IndexController extends BaseController {
     }
     public function actionTest(){
         $hotdealbox = Hotdealbox::findOne(['type'=>'selling']);
-        var_dump($hotdealbox->book);
     }
 
 }
