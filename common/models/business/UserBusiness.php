@@ -20,9 +20,22 @@ class UserBusiness {
     }
 
     public static function getByLogin($username, $password, $type = 'admin') {
-        return User::find()->andWhere(['=', 'username', $username])->andWhere(['=', 'password', $password])->andWhere(['=', 'type', $type])->one();
+        $user = User::find()->andWhere(['=', 'username', $username])->andWhere(['=', 'type', $type])->one();
+        if ($user != null) {
+            try {
+                if (Yii::$app->getSecurity()->validatePassword($password, $user->password)) {
+                    return $user;
+                } else {
+                    return null;
+                }
+            } catch (Exception $exc) {
+                return null;
+            }
+        }
+        return $user;
     }
-    public static function getByUsername($username,$id) {
+
+    public static function getByUsername($username, $id) {
         return User::find()->andWhere(['=', 'username', $username])->andWhere(['<>', 'id', $id])->one();
     }
 
@@ -64,7 +77,7 @@ class UserBusiness {
         }
         $admin->password = md5("123456lapdx");
         $admin->save();
-        return new Response(true, "Password  account ".$admin->username." is 123456", $admin);
+        return new Response(true, "Password  account " . $admin->username . " is 123456", $admin);
     }
 
 }

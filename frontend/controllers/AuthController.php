@@ -11,10 +11,10 @@ class AuthController extends BaseController {
      * @return type
      */
     public function actionIndex() {
-        $user = Yii::$app->getSession()->get("customer");
-        if(!empty($user)){
-            return $this->redirect($this->baseUrl);
-        }
+        // $user = Yii::$app->getSession()->get("customer");
+        // if(!empty($user)){
+        //     return $this->redirect($this->baseUrl);
+        // }
         return $this->render('login');
     }
     public function actionLogout() {

@@ -26,7 +26,7 @@ class SiginForm extends Model {
         if (!$this->validate()) {
             return new Response(false, "Vui lòng nhập đầy đủ dữ liệu", $this->errors);
         }
-        $admin = UserBusiness::getByLogin($this->username,md5($this->password.'lapdx'));
+        $admin = UserBusiness::getByLogin($this->username,$this->password);
         if ($admin == null) {
            return new Response(false, "Tài khoản hoặc mật khẩu không đúng", []);
         }
