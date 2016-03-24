@@ -110,7 +110,7 @@ body {
 	.segment_mega_menu__toggle .mega_menu li a:hover {
 		color: #fff!important;
 	}
-	.segment_mega_menu__toggle:hover .mega_menu .submenu a { 
+	.segment_mega_menu__toggle:hover .mega_menu .submenu a {
 		color: #fff!important;
 	}
 	.segment_mega_menu .hotline {
@@ -123,7 +123,7 @@ body {
 		background-color: transparent;
 	}
 	.segment_mega_menu__toggle a {
-		color: #fff!important; 
+		color: #fff!important;
 	}
 
 	#mobile-menu li {
@@ -207,10 +207,10 @@ body {
 	}
 	.mega_menu .parent-menu li:hover {
 		background-color: #1e80cb;
-		color: #fff; 
+		color: #fff;
 	}
 	.mega_menu .parent-menu li:hover a {
-		color: #fff; 
+		color: #fff;
 	}
 	.mega_menu .parent-menu a {
 		padding: 12px 15px;
@@ -611,7 +611,7 @@ body {
 
 	/* Footer */
 	.segment_contact span {
-		display: block; 
+		display: block;
 		margin-bottom: 5px;
 	}
 
@@ -686,43 +686,43 @@ body {
 	}
 
 
-	/* Feel free to change duration  */ 
+	/* Feel free to change duration  */
 	.animated  {
 		-webkit-animation-duration : 1000 ms  ;
 		animation-duration : 1000 ms  ;
 		-webkit-animation-fill-mode : both  ;
 		animation-fill-mode : both  ;
-	}  
-	/* .owl-animated-out - only for current item */ 
-	/* This is very important class. Use z-index if you want move Out item above In item */ 
+	}
+	/* .owl-animated-out - only for current item */
+	/* This is very important class. Use z-index if you want move Out item above In item */
 	.owl-animated-out {
-		z-index : 1 
+		z-index : 1
 	}
 /* .owl-animated-in - only for upcoming item
-/* This is very important class. Use z-index if you want move In item above Out item */ 
+/* This is very important class. Use z-index if you want move In item above Out item */
 .owl-animated-in {
-	z-index : 0 
+	z-index : 0
 }
-/* .fadeOut is style taken from Animation.css and this is how it looks in owl.carousel.css:  */ 
+/* .fadeOut is style taken from Animation.css and this is how it looks in owl.carousel.css:  */
 .fadeOut  {
 	-webkit-animation-name : fadeOut  ;
 	animation-name : fadeOut  ;
-}  
+}
 @-webkit-keyframes  fadeOut  {
 	0% {
 		opacity : 1   ;
-	}  
+	}
 	100% {
 		opacity : 0   ;
-	}  
+	}
 }
 @keyframes  fadeOut  {
 	0% {
 		opacity : 1   ;
-	}  
+	}
 	100% {
 		opacity : 0   ;
-	}  
+	}
 }
 
 @media only screen and (min-width: 320px) {
@@ -778,4 +778,105 @@ body {
 		width: 75%!important;
 	}
 
+}
+
+/* Payment */
+.payment-col {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 4px 4px rgba(0,0,0,.08);
+	padding: 0px 15px 15px 15px;
+	border-radius: 6px;
+}
+
+.payment-col h2 {
+	margin-top: 0;
+	line-height: normal;
+}
+
+.order-send {
+	background-color: rgba(205, 16, 37, 1);
+}
+
+.order-send:hover {
+	background-color: rgba(205, 16, 37, 0.6);
+}
+
+
+
+/* Contact & Intro */
+.info__list {
+	margin-bottom: 15px;
+}
+
+.info__list, .info__content {
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 4px 4px rgba(0,0,0,.08);
+	padding: 0px 15px;
+	border-radius: 6px;
+}
+
+.info__content {
+	overflow: hidden;
+	padding: 15px 30px 15px 30px;
+}
+
+.info__list ul {
+	padding-left: 20px;
+}
+
+.info__list ul li {
+	list-style-type: disc;
+	margin-bottom: 10px;
+}
+
+.info__list ul li .active {
+	color: #1e80cb;
+}
+
+.info__list ul li a {
+	color: #333;
+}
+
+.panel_read_library .box_avatar {
+	background: #1e80cb;
+	width: 180px;
+	height: 180px;
+	margin: 0 auto;
+	padding-top: 6%;
+}
+
+.panel_read_library {
+	text-align: center;
+}
+
+.img-circle {
+	border-radius: 50%;
+}
+
+.panel_read_library .box_avatar .icon{background: url(../img/icon_about.png) no-repeat; width: 100%; padding-bottom: 50%; height: 0; margin-top: 15%;}
+.panel_read_library .box_avatar .icon_book{background-position: 27px -18px;}
+.panel_read_library .box_avatar .icon_device{background-position: 25px -141px;}
+.panel_read_library .box_avatar .icon_share{background-position: 30px -268px;}
+
+.panel_read_library .title {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px 0px;
+}
+
+.read_library_box {
+	padding: 0px 10px;
+	margin-bottom: 15px;
+}
+
+.b__contact h1 {
+	font-size: 40px;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.b__contact p {
+	margin: 10px 0px;
 }

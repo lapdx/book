@@ -30,6 +30,12 @@ class IndexController extends BaseController {
             'sale_items' => $sale_items,
             ]);
     }
+    public function actionContact(){
+        return $this->render('contact');
+    }
+    public function actionIntro(){
+        return $this->render('intro');
+    }
     public function actionCart(){
         $cart = array('item'=>array(),'bill'=>0);
         if(isset(Yii::$app->session['cart'])){
@@ -42,6 +48,9 @@ class IndexController extends BaseController {
         return $this->render('cart', [
             'cart' => $cart,
             ]);
+    }
+    public function actionPayment(){
+        return $this->render('payment');
     }
     public function actionRemove_cart(){
         unset(Yii::$app->session['cart']);
