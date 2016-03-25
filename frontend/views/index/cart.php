@@ -62,7 +62,7 @@ use yii\helpers\Url;
 										</div>
 										<div class="right">
 											<a class="comment-submit" href="<?=Url::toRoute(['index/remove_cart'])?>">Hủy giỏ hàng</a>
-											<a class="comment-submit" href="#">Thanh toán</a>
+											<a class="comment-submit" href="<?=Url::toRoute(['index/payment'])?>">Thanh toán</a>
 										</div>
 									</td>
 								</tr>

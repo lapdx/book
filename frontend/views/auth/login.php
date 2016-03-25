@@ -1,3 +1,7 @@
+<?php
+use yii\bootstrap\Alert;
+?>
+
 <div class="product_content">
     <div class="container">
         <nav class="b-breadcrumb">
@@ -13,14 +17,18 @@
             <div class="login-b-content col s6 m6 l6">
                 <h3 class="b-login-title text-center">Đăng nhập tài khoản BookStore</h3>
                 <form class="b-loginForm " name="loginForm">
-                    <div class="form-group">
+                   <?=Alert::widget([
+                       'options' => ['class' => 'alert-info'],
+                       'body' => Yii::$app->session->getFlash('danger'),
+                       ]);?>
+                       <div class="form-group">
                         <div class="b-input-group">
-                            <input type="text" class="form-control" placeholder="Tên đăng nhập">
+                            <input required type="text" class="form-control" placeholder="Tên đăng nhập">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="b-input-group">
-                            <input type="password" class="form-control" placeholder="Mật khẩu">
+                            <input required type="password" class="form-control" placeholder="Mật khẩu">
                         </div>
                     </div>
                     <div class="checkbox">

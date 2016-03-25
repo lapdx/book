@@ -11,10 +11,9 @@ class AuthController extends BaseController {
      * @return type
      */
     public function actionIndex() {
-        // $user = Yii::$app->getSession()->get("customer");
-        // if(!empty($user)){
-        //     return $this->redirect($this->baseUrl);
-        // }
+        $session = Yii::$app->session;
+        $session->addFlash('danger', [1=>'You have successfully deleted your post.']);
+        var_dump($session->getFlash('danger'));return;
         return $this->render('login');
     }
     public function actionLogout() {

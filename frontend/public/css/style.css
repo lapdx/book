@@ -436,6 +436,7 @@ body {
 	.product-item-mini {
 		margin: 15px 0;
 		overflow: hidden;
+		padding: 10px;
 	}
 	.product-item-mini:hover {
 		box-shadow: 0 1px 2px #cecece;
@@ -448,7 +449,7 @@ body {
 	}
 	.pim-name {
 		margin: 0;
-		font-size: 15px;
+		font-size: 12px;
 		color: #636363;
 	}
 	.pim-name:hover {
@@ -545,7 +546,7 @@ body {
 	}
 
 	.b-login-title, .b-register-title {
-		font-size: 32px;
+		font-size: 24px;
 		font-weight: 700;
 		letter-spacing: -1px;
 		text-align: center;
@@ -566,7 +567,7 @@ body {
 	.b-input-group input {
 		margin: 0;
 		border-bottom: 0;
-		font-size: 20px;
+		font-size: 16px;
 		font-weight: 400;
 		height: 50px;
 		line-height: 50px;
@@ -584,7 +585,7 @@ body {
 		height: 50px;
 		line-height: 50px;
 		color: #fff;
-		font-size: 20px;
+		font-size: 16px;
 	}
 
 	.b-btn-login:hover, .b-register-login:hover {

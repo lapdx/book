@@ -46,6 +46,14 @@ class IndexController extends BaseController {
             'cart' => $cart,
             ]);
     }
+    //Trang liên hệ
+    public function actionContact(){
+        return $this->render('contact');
+    }
+    //Trang giới thiệu
+    public function actionIntro(){
+        return $this->render('intro');
+    }
     //Trang hủy giỏ hàng
     public function actionRemove_cart(){
         unset(Yii::$app->session['cart']);
@@ -59,6 +67,7 @@ class IndexController extends BaseController {
         Yii::$app->session['cart'] = $cart;
         $this->redirect(array('/index/cart'));
     }
+    //Trang thanh toán
     public function actionPayment(){
         return $this->render('payment', [
             // 'categories' => $categories,
