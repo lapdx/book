@@ -20,7 +20,7 @@ use yii\bootstrap\Alert;
                    <?=Alert::widget([
                        'options' => ['class' => 'alert-info'],
                        'body' => Yii::$app->session->getFlash('danger'),
-                       ]);?>
+                       ])?>
                        <div class="form-group">
                         <div class="b-input-group">
                             <input required type="text" class="form-control" placeholder="Tên đăng nhập">

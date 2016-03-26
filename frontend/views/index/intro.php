@@ -1,3 +1,8 @@
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+?>
+
 <div class="product_content">
 	<div class="container">
 		<nav class="b-breadcrumb">

@@ -117,8 +117,8 @@ $categories = Category::findAll(['parentId'=>0]);
                 </ul>
               </div>
             </li>
-            <li class="waves-effect waves-light"><a href="#">Giới thiệu</a></li>
-            <li class="waves-effect waves-light"><a href="#">Liên hệ</a></li>
+            <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/intro'])?>">Giới thiệu</a></li>
+            <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/contact'])?>">Liên hệ</a></li>
             <span class="hotline right"><i class="material-icons">call</i><a href="tel:01688912317">Hỗ trợ: 01688912317 (24/7)</a></span>
           </ul>
           <ul class="side-nav" id="mobile-menu">

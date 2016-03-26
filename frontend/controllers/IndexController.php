@@ -20,6 +20,7 @@ class IndexController extends BaseController {
      * Trang chủ backend
      * @return type
      */
+    public $enableCsrfValidation = false;
     //Trang chủ
     public function actionIndex() {
         $categories     = Category::findAll(['parentId'=>0]);
@@ -69,8 +70,17 @@ class IndexController extends BaseController {
     }
     //Trang thanh toán
     public function actionPayment(){
+        $cart = array('item'=>array(),'bill'=>0);
+        if(isset(Yii::$app->session['cart'])){
+            foreach (Yii::$app->session['cart'] as $key => $value){
+                $item = Item::findOne(['id'=>$key]);
+                $cart['item'][] = array('item'=>$item,'quantity'=>$value);
+                $cart['bill'] += Item::getSellPrice($key)*$value;
+            }
+        }
+        Yii::$app->session->setFlash('danger','hdahsdhahdsah');
         return $this->render('payment', [
-            // 'categories' => $categories,
+            'cart' => $cart,
             // 'new_items'  => $new_items,
             // 'sale_items' => $sale_items,
             ]);

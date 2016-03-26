@@ -38,3 +38,9 @@ a:hover, a:focus{
     color: #3c8dbc;
     cursor: pointer;
 }
+.product-info.left{
+    margin-left: 15px;
+}
+.product.product-has-image{
+    margin:20px 0px;
+}

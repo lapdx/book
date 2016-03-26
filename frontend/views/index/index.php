@@ -50,7 +50,7 @@ use yii\helpers\Url;
                 <div class="category-item-title">
                     <h2 class="block-title">Sản phẩm mới</h2>
                 </div>
-                <div class="carousel">
+                <div class="carousel" style="z-index: 69;">
                     <?php foreach($new_items as $item):?>
                         <div class="carousel-item">
                             <div class="product-item">
