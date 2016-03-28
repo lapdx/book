@@ -37,7 +37,7 @@ class OrderInfo extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['name', 'email', 'address', 'phone', 'paymentMethod', 'note'], 'required'],
+            [['name', 'email', 'address', 'phone', 'paymentMethod'], 'required'],
             [['totalPrice'], 'number'],
             [['createTime', 'remove', 'updateTime'], 'integer'],
             [['name', 'email', 'address'], 'string', 'max' => 255],

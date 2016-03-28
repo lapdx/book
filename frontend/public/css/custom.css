@@ -44,3 +44,10 @@ a:hover, a:focus{
 .product.product-has-image{
     margin:20px 0px;
 }
+.register-b-content, .login-b-content{
+    background-color: #fff;
+}
+.logged{
+    color: #fff;
+    margin-right: 15px;
+}

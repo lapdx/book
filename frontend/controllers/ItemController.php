@@ -102,7 +102,7 @@ class ItemController extends BaseController {
             $data['bill'] += Item::getSellPrice($key) * $value;
         }
         $session['total']   = $data['total'];
-        $session['bill']    = number_format($data['bill'],0,',','.');
+        $session['bill']    = $data['bill'];
         $session['cart']    = $cart;
         echo json_encode($data);
     }

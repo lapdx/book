@@ -82,9 +82,6 @@ class Item extends \yii\db\ActiveRecord
         if($image) return $image->imageId;
         else return 'images/no-image.png';
     }
-    public function getHotdeal(){
-        return $this->hasMany(Hotdealbox::className(), ['itemId' => 'id']);
-    }
     public static function getSellPrice($id){
         return static::findOne(['id'=>$id])->sellPrice;
     }

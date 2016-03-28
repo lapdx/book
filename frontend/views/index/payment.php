@@ -10,7 +10,7 @@ use yii\helpers\Url;
 			<div class="nav-wrapper">
 				<div class="col s12">
 					<a href="<?=Url::home()?>" class="breadcrumb">Trang chủ</a>
-					<a href="<?=Url::toRoute(['index/payment'])?>" class="breadcrumb">Thanh toán</a>
+					<a href="<?=Url::current()?>" class="breadcrumb">Thanh toán</a>
 				</div>
 			</div>
 		</nav>
@@ -27,6 +27,7 @@ use yii\helpers\Url;
 				'body' => Yii::$app->session->getFlash('danger'),
 				])?>
 				<form id="b-payment" method="post" action="">
+					<input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
 					<div context="checkout" class="margin-bottom-20">
 						<div class="main">
 							<div class="wrap clearfix">
@@ -43,13 +44,16 @@ use yii\helpers\Url;
 											</div>
 
 											<div class="form-group">
-												<input type="text" name="name" class="form-control txtName" value="" placeholder="Họ và tên">
+												<input type="text" name="name" class="form-control txtName" value="" placeholder="Họ và tên" required>
 											</div>
 											<div class="form-group">
-												<input type="number" name="phone" class="form-control txtPhone" value="" placeholder="Số điện thoại">
+												<input type="number" name="phone" class="form-control txtPhone" value="" placeholder="Số điện thoại" required>
 											</div>
 											<div class="form-group">
-												<input type="text" name="address" class="form-control" value="" placeholder="Địa chỉ">
+												<input type="text" name="address" class="form-control" value="" placeholder="Địa chỉ" required>
+											</div>
+											<div class="form-group">
+												<textarea class="form-control" name="note" maxlength="500" placeholder="Ghi chú"></textarea>
 											</div>
 											<div class="form-group">
 												<select name="method">
@@ -74,19 +78,18 @@ use yii\helpers\Url;
 															<?php else:?>
 																<ul class="product-list">
 																	<?php foreach($cart['item'] as $item):?>
-																	<li class="product product-has-image clearfix" style="overflow: hidden; margin-bottom:5px;">
-																		<?=Html::img('@web/'.$item['item']->getThumbnailImageUrl(),['width'=>50,'class'=>'left product-image'])?>
-																		<!-- <img src="" class="left product-image" width="30" style="margin-right:5px;"> -->
-																		<div class="product-info left"> 
-																			<span class="product-info-name"> 
-																				<span style="font-size:12px"><?=Html::encode($item['item']->name)?></span>  <span style="color:#C00; padding:0px 5px;"> X </span> 
-																			</span><?=$item['quantity']?>
-																		</div>
-																		<span class="product-price right"> 
-																			<?=number_format($item['quantity']*$item['item']->sellPrice,0,',','.')?>đ
-																		</span>
-																	</li>
-																<?php endforeach?>
+																		<li class="product product-has-image clearfix" style="overflow: hidden; margin-bottom:5px;">
+																			<?=Html::img('@web/'.$item['item']->getThumbnailImageUrl(),['width'=>50,'class'=>'left product-image'])?>
+																			<div class="product-info left"> 
+																				<span class="product-info-name"> 
+																					<span style="font-size:12px"><?=Html::encode($item['item']->name)?></span>  <span style="color:#C00; padding:0px 5px;"> X </span> 
+																				</span><?=$item['quantity']?>
+																			</div>
+																			<span class="product-price right"> 
+																				<?=number_format($item['quantity']*$item['item']->sellPrice,0,',','.')?>đ
+																			</span>
+																		</li>
+																	<?php endforeach?>
 																</ul>
 																<ul>
 																	<li class="product product-has-image clearfix">
@@ -107,12 +110,6 @@ use yii\helpers\Url;
 														<?php else:?>
 															<button class="btn btn-primary col-md-12 order-send waves-effect waves-light" name="sendcartok" type="submit" style="cursor: pointer;">ĐẶT HÀNG</button>
 														<?php endif?>
-													</div>
-													<div class="form-group has-error">
-														<div class="help-block ">
-															<ul class="list-unstyled">
-															</ul>
-														</div>
 													</div>
 												</div>
 											</div>

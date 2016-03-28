@@ -9,7 +9,7 @@ use yii\helpers\Url;
 			<div class="nav-wrapper">
 				<div class="col s12">
 					<a href="<?=Url::home()?>" class="breadcrumb">Trang chủ</a>
-					<a href="<?=Url::toRoute(['index/cart'])?>" class="breadcrumb">Giỏ hàng</a>
+					<a href="<?=Url::current()?>" class="breadcrumb">Giỏ hàng</a>
 				</div>
 			</div>
 		</nav>

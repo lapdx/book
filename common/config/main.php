@@ -20,8 +20,8 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
-                'username' => 'noreply.hoalua@gmail.com',
-                'password' => 'hoalua.com',
+                'username' => 'trunglbdz1@gmail.com',
+                'password' => 'trungdepzai',
                 'port' => '587',
                 'encryption' => 'tls',
             ],

@@ -9,7 +9,7 @@ use yii\helpers\Url;
 			<div class="nav-wrapper">
 				<div class="col s12">
 					<a href="<?=Url::home()?>" class="breadcrumb">Trang chủ</a>
-					<a href="<?=Url::toRoute(['index/intro'])?>" class="breadcrumb">Giới thiệu</a>
+					<a href="<?=Url::current()?>" class="breadcrumb">Giới thiệu</a>
 				</div>
 			</div>
 		</nav>

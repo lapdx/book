@@ -1,10 +1,15 @@
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+?>
+
 <div class="product_content">
 	<div class="container">
 		<nav class="b-breadcrumb">
 			<div class="nav-wrapper">
 				<div class="col s12">
-					<a href="#!" class="breadcrumb">Trang chủ</a>
-					<a href="#!" class="breadcrumb">Liên hệ</a>
+					<a href="<?=Url::home()?>" class="breadcrumb">Trang chủ</a>
+					<a href="<?=Url::current()?>" class="breadcrumb">Liên hệ</a>
 				</div>
 			</div>
 		</nav>
@@ -14,8 +19,8 @@
 				<div class="col s12 m6 l2">
 					<div class="info__list">
 						<ul>
-							<li><a href="#">Giới thiệu</a></li>
-							<li><a class="active" href="#">Liên hệ</a></li>
+							<li><a href="<?=Url::toRoute(['index/intro'])?>">Giới thiệu</a></li>
+							<li><a class="active" href="<?=Url::toRoute(['index/contact'])?>">Liên hệ</a></li>
 						</ul>
 					</div>
 				</div>
