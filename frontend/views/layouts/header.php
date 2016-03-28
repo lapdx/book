@@ -45,11 +45,13 @@ $categories = Category::findAll(['parentId'=>0]);
         <div class="col-xs-12 col-md-2">
           <div id="user_do_login">
             <div class="user-actions">
-              <?php if(Yii::$app->user->isGuest):?>               
+              <?php if(Yii::$app->user->isGuest):?>
                 <a href="<?=Url::toRoute(['auth/signup'])?>">Đăng ký</a>
                 <a href="<?=Url::toRoute(['auth/'])?>">Đăng nhập</a>
               <?php else:?>
-                <div class="logged"><?=Yii::$app->user->identity->username?></div>
+                <a href="<?=Url::toRoute(['auth/profile'])?>"><?=Yii::$app->user->identity->username?></a>
+                <a href="<?=Url::toRoute(['auth/logout'])?>">Đăng xuất</a>
+                <div class="logged"></div>
               <?php endif?>
             </div>
           </div>
@@ -71,7 +73,7 @@ $categories = Category::findAll(['parentId'=>0]);
             </div>
           </div>
           <div class="col s6 m6 l6">
-            <!--  -->  
+            <!--  -->
             <nav>
              <div class="nav-wrapper">
               <form method="GET" action="./search/">
@@ -86,7 +88,7 @@ $categories = Category::findAll(['parentId'=>0]);
         <div class="col s6 m2 l4">
           <div class="cart-mini right">
             <div class="cart-mini-button">
-              <a class="waves-effect waves-light" href="<?=Url::toRoute(['index/cart'])?>"><i class="material-icons">shopping_cart</i><span class="item_cart"><?=$session['total']?></span> sản phẩm</a> 
+              <a class="waves-effect waves-light" href="<?=Url::toRoute(['index/cart'])?>"><i class="material-icons">shopping_cart</i><span class="item_cart"><?=$session['total']?></span> sản phẩm</a>
             </div>
           </div>
         </div>

@@ -2,12 +2,6 @@
 
 namespace frontend\controllers;
 
-use common\models\business\CategoryBusiness;
-use common\models\business\ItemBusiness;
-use common\models\business\MetaBusiness;
-use common\models\enu\MetaType;
-use common\models\input\ItemSearch;
-use common\util\UrlUtils;
 use common\models\db\Category;
 use common\models\db\Item;
 use common\models\db\Hotdealbox;

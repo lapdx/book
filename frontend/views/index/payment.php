@@ -5,7 +5,7 @@ use yii\helpers\Url;
 ?>
 
 <div class="product_content">
-	<div class="container">	
+	<div class="container">
 		<nav class="b-breadcrumb">
 			<div class="nav-wrapper">
 				<div class="col s12">
@@ -20,7 +20,7 @@ use yii\helpers\Url;
 			'body' => Yii::$app->session->getFlash('success'),
 			]);?>
 			<a class="comment-submit" href="<?=Url::home()?>">Tiếp tục mua sắm</a>
-		<?php else: 
+		<?php else:
 		if(Yii::$app->session->hasFlash('danger'))
 			echo Alert::widget([
 				'options' => ['class' => 'alert-danger'],
@@ -32,7 +32,7 @@ use yii\helpers\Url;
 						<div class="main">
 							<div class="wrap clearfix">
 								<div class="row">
-									<div class="col s12 m6 l6">						
+									<div class="col s12 m6 l6">
 										<div class="payment-col">
 											<div class="form-group m0">
 												<h2>
@@ -40,20 +40,17 @@ use yii\helpers\Url;
 												</h2>
 											</div>
 											<div class="form-group">
-												<input type="text" name="email" class="form-control txtEmail" value="" placeholder="Email" required>
+												<input type="text" name="email" class="form-control txtEmail" placeholder="Email" required value="<?=$information['email']?>">
 											</div>
 
 											<div class="form-group">
-												<input type="text" name="name" class="form-control txtName" value="" placeholder="Họ và tên" required>
+												<input type="text" name="name" class="form-control txtName" placeholder="Họ và tên" required value="<?=$information['fullname']?>">
 											</div>
 											<div class="form-group">
-												<input type="number" name="phone" class="form-control txtPhone" value="" placeholder="Số điện thoại" required>
+												<input type="number" name="phone" class="form-control txtPhone" placeholder="Số điện thoại" required value="<?=$information['phone']?>">
 											</div>
 											<div class="form-group">
-												<input type="text" name="address" class="form-control" value="" placeholder="Địa chỉ" required>
-											</div>
-											<div class="form-group">
-												<textarea class="form-control" name="note" maxlength="500" placeholder="Ghi chú"></textarea>
+												<input type="text" name="address" class="form-control" placeholder="Địa chỉ" required>
 											</div>
 											<div class="form-group">
 												<select name="method">
@@ -63,7 +60,7 @@ use yii\helpers\Url;
 											</div>
 										</div>
 									</div>
-									<div class="col s12 m6 l6">			
+									<div class="col s12 m6 l6">
 										<div class="payment-col">
 											<div class="order-summary order-summary--custom-background-color ">
 												<div class="order-summary-header">
@@ -80,12 +77,12 @@ use yii\helpers\Url;
 																	<?php foreach($cart['item'] as $item):?>
 																		<li class="product product-has-image clearfix" style="overflow: hidden; margin-bottom:5px;">
 																			<?=Html::img('@web/'.$item['item']->getThumbnailImageUrl(),['width'=>50,'class'=>'left product-image'])?>
-																			<div class="product-info left"> 
-																				<span class="product-info-name"> 
-																					<span style="font-size:12px"><?=Html::encode($item['item']->name)?></span>  <span style="color:#C00; padding:0px 5px;"> X </span> 
+																			<div class="product-info left">
+																				<span class="product-info-name">
+																					<span style="font-size:12px"><?=Html::encode($item['item']->name)?></span>  <span style="color:#C00; padding:0px 5px;"> X </span>
 																				</span><?=$item['quantity']?>
 																			</div>
-																			<span class="product-price right"> 
+																			<span class="product-price right">
 																				<?=number_format($item['quantity']*$item['item']->sellPrice,0,',','.')?>đ
 																			</span>
 																		</li>
@@ -93,10 +90,10 @@ use yii\helpers\Url;
 																</ul>
 																<ul>
 																	<li class="product product-has-image clearfix">
-																		<strong style="font-size: 18px">Tổng cộng:</strong> 
-																		<strong class="product-price right" style="color:#3C0"> 
+																		<strong style="font-size: 18px">Tổng cộng:</strong>
+																		<strong class="product-price right" style="color:#3C0">
 																			<?=number_format($cart['bill'],0,',','.')?>đ
-																		</strong> 
+																		</strong>
 																	</li>
 																</ul>
 															<?php endif?>

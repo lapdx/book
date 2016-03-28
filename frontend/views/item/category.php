@@ -49,12 +49,12 @@ use yii\helpers\Url;
                                 <?php foreach($selling as $sell):
                                 $item = $sell->book;?>
                                 <li class="product-item-mini">
-                                <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
+                                    <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
                                         <?= Html::img('@web/'.$item->getThumbnailImageUrl(),['class'=>'pim-image'])?>
                                         <h3 class="pim-name"><?=Html::encode($item->name)?></h3>
                                         <p class="pim-description"><?=substr(strip_tags($item->content),0,100)?></p>
                                         <?php if($item->sellPrice != $item->startPrice):?>
-                                            <p class="pim-price"> <?=$item->sellPrice?>₫ <span> <?=$item->startPrice?>₫ </span></p> 
+                                            <p class="pim-price"> <?=$item->sellPrice?>₫ <span> <?=$item->startPrice?>₫ </span></p>
                                         <?php else:?>
                                             <p class="pim-price"> <?=$item->sellPrice?>₫</p>
                                         <?php endif?>
@@ -86,8 +86,10 @@ use yii\helpers\Url;
                 </div>
             </div>
             <?php $i++;if($i%3 == 0) echo '</div>';?>
-        <?php endif;endforeach;endif?>
-    </div>
+        <?php endif;endforeach;else:?>
+        <h2 class="cc-products-title">Không có sản phẩm nào</h2>
+    <?php endif?>
+</div>
 </div>
 </div>
 </div>

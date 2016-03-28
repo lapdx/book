@@ -7,6 +7,7 @@ use common\models\db\Item;
 use common\models\db\Hotdealbox;
 use common\models\db\OrderInfo;
 use common\models\db\OrderItem;
+use common\models\db\User;
 use Yii;
 
 class IndexController extends BaseController {
@@ -21,10 +22,12 @@ class IndexController extends BaseController {
         $categories     = Category::findAll(['parentId'=>0]);
         $new_items      = Item::find()->where('active = 1')->orderBy('createTime DESC')->limit(10)->all();
         $sale_items     = Item::find()->where('sellPrice != startPrice AND active = 1')->limit(10)->all();
+        $selling        = Hotdealbox::getSelling();
         return $this->render('index', [
             'categories' => $categories,
             'new_items'  => $new_items,
             'sale_items' => $sale_items,
+            'selling'=>$selling
             ]);
     }
 
@@ -67,8 +70,7 @@ class IndexController extends BaseController {
     public function actionPayment(){
         $request = Yii::$app->request;
         $cart = array('item'=>array(),'bill'=>0);
-        
-        // var_dump(Yii::$app->mailer->transport);return;
+
         if(isset(Yii::$app->session['cart']) && !empty(Yii::$app->session['cart'])){
             foreach (Yii::$app->session['cart'] as $key => $value){
                 $item = Item::findOne(['id'=>$key]);
@@ -76,6 +78,16 @@ class IndexController extends BaseController {
                 $cart['bill'] += Item::getSellPrice($key)*$value;
             }
         }else Yii::$app->session->setFlash('danger','Không có sản phẩm nào trong giỏ hàng');
+        $information = array();
+        $information['email']       = $request->post('email','');
+        $information['fullname']    = $request->post('name','');
+        $information['phone']       = $request->post('phone','');
+        if(!Yii::$app->user->isGuest && !$request->isPost){
+            $user = User::findOne(['id'=>Yii::$app->user->identity->id]);
+            $information['email']       = $user->email;
+            $information['fullname']    = $user->fullname;
+            $information['phone']       = $user->phone;
+        }
         if ($request->isPost) {
             if(!Yii::$app->session->hasFlash('danger')){
                 $db = Yii::$app->db;
@@ -116,6 +128,7 @@ class IndexController extends BaseController {
                                 Yii::$app->session->setFlash('danger','Đã có lỗi xảy ra');
                                 return $this->render('payment', [
                                     'cart' => $cart,
+                                    'information'=>$information
                                     ]);
                             }
                             $content .= '<li><b>'.$item['item']->name.'</b> x <b>'.$item['quantity'].'</b></li>';
@@ -137,13 +150,11 @@ class IndexController extends BaseController {
 
                     throw $e;
                 }
-            }           
+            }
         }
-        
         return $this->render('payment', [
             'cart' => $cart,
-            // 'new_items'  => $new_items,
-            // 'sale_items' => $sale_items,
+            'information'=>$information
             ]);
     }
     public function actionSearch() {
@@ -166,7 +177,7 @@ class IndexController extends BaseController {
         phpinfo();
     }
     public function actionTest(){
-        
+
     }
 
 }
