@@ -136,7 +136,7 @@ class IndexController extends BaseController {
                         $content .= '<br>Tổng giá trị đơn hàng của bạn là: <b>'.number_format($item['quantity']*$item['item']->sellPrice,0,',','.').'đ</b><br>Chúng tôi sẽ liên lạc lại với bạn trong thời gian sớm nhất để giao hàng';
                         Yii::$app->mailer->compose()
                         ->setFrom('trunglbdz1@gmail.com')
-                        ->setTo('trunglbict@gmail.com')
+                        ->setTo($order->email)
                         ->setSubject('[BookStore] Đặt hàng thành công')
                         ->setHtmlBody($content)
                         ->send();

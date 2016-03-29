@@ -20,5 +20,4 @@ class AuthController extends ServiceController {
         }
         return $this->response($resp);
     }
-
 }
