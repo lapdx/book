@@ -45,10 +45,15 @@ $categories = Category::findAll(['parentId'=>0]);
         <div class="col-xs-12 col-md-2">
           <div id="user_do_login">
             <div class="user-actions">
-              <a href="/dang-ky">Đăng ký</a>
-              <a href="/dang-nhap/">Đăng nhập</a>
+              <?php if(Yii::$app->user->isGuest):?>
+                <a href="<?=Url::toRoute(['auth/signup'])?>">Đăng ký</a>
+                <a href="<?=Url::toRoute(['auth/'])?>">Đăng nhập</a>
+              <?php else:?>
+                <a href="<?=Url::toRoute(['auth/profile'])?>"><?=Yii::$app->user->identity->username?></a>
+                <a href="<?=Url::toRoute(['auth/logout'])?>">Đăng xuất</a>
+                <div class="logged"></div>
+              <?php endif?>
             </div>
-            <div class="logged"></div>
           </div>
         </div>
       </div>
@@ -68,12 +73,12 @@ $categories = Category::findAll(['parentId'=>0]);
             </div>
           </div>
           <div class="col s6 m6 l6">
-            <!--  -->  
+            <!--  -->
             <nav>
              <div class="nav-wrapper">
-              <form method="GET" action="./search/">
+              <form method="GET" action="<?=Url::toRoute(['item/search'])?>">
                 <div class="input-field">
-                  <input id="search" name="q" type="search" required="" placeholder="Tìm kiếm">
+                  <input id="search" name="k" type="search" required="" placeholder="Tìm kiếm">
                   <label for="search" class="active"><i class="material-icons">search</i></label>
                 </div>
               </form>
@@ -83,7 +88,7 @@ $categories = Category::findAll(['parentId'=>0]);
         <div class="col s6 m2 l4">
           <div class="cart-mini right">
             <div class="cart-mini-button">
-            <a class="waves-effect waves-light" href="<?=Url::toRoute(['index/cart'])?>"><i class="material-icons">shopping_cart</i><span class="item_cart"><?=$session['total']?></span> sản phẩm</a> 
+              <a class="waves-effect waves-light" href="<?=Url::toRoute(['index/cart'])?>"><i class="material-icons">shopping_cart</i><span class="item_cart"><?=$session['total']?></span> sản phẩm</a>
             </div>
           </div>
         </div>
@@ -117,9 +122,8 @@ $categories = Category::findAll(['parentId'=>0]);
                 </ul>
               </div>
             </li>
-            <li class="waves-effect waves-light"><a href="#">Giới thiệu</a></li>
-            <li class="waves-effect waves-light"><a href="#">Tin tức</a></li>
-            <li class="waves-effect waves-light"><a href="#">Liên hệ</a></li>
+            <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/intro'])?>">Giới thiệu</a></li>
+            <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/contact'])?>">Liên hệ</a></li>
             <span class="hotline right"><i class="material-icons">call</i><a href="tel:01688912317">Hỗ trợ: 01688912317 (24/7)</a></span>
           </ul>
           <ul class="side-nav" id="mobile-menu">
@@ -140,9 +144,8 @@ $categories = Category::findAll(['parentId'=>0]);
                   <?php endif;endforeach?>
                 </ul>
               </li>
-              <li class="waves-effect waves-light"><a href="#">Giới thiệu</a></li>
-              <li class="waves-effect waves-light"><a href="#">Tin tức</a></li>
-              <li class="waves-effect waves-light"><a href="#">Liên hệ</a></li>
+              <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/intro'])?>">Giới thiệu</a></li>
+              <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/contact'])?>">Liên hệ</a></li>
             </ul>
           </div>
         </div>

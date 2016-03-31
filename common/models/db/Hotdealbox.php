@@ -55,9 +55,9 @@ class Hotdealbox extends \yii\db\ActiveRecord {
         return Item::findOne(['id'=>$this->itemId]);
     }
     public static function getSelling(){
-        return static::findAll(['type'=>'selling']);
+        return static::find()->where('type = "selling"')->limit(10)->all();
     }
     public static function getHot(){
-        return static::findAll(['type'=>'hot']);
+        return static::find()->where('type = "hot"')->limit(10)->all();
     }
 }

@@ -46,33 +46,14 @@ use yii\helpers\Url;
 
     <div class="main_block_section">
         <div class="container">
-            <div class="block">
-                <div class="category-item-title">
-                    <h2 class="block-title">Sản phẩm mới</h2>
-                </div>
-                <div class="carousel">
-                    <?php foreach($new_items as $item):?>
-                        <div class="carousel-item">
-                            <div class="product-item">
-                                <?=Html::img('@web/'.$item->getThumbnailImageUrl())?>
-                                <?= Html::a(Html::encode($item->name), ['item/detail', 'id' => $item->id], ['class' => 'product-item-name']) ?>
-                                <?php if($item->sellPrice != $item->startPrice):?>
-                                    <span class="product-item-price-sale"><?=number_format($item->startPrice,0,',','.')?>đ</span>
-                                <?php endif?>
-                                <span class="product-item-price"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
-                                <a class="product-item-cart add_to_cart" id="add_to_cart" data-id="<?=$item->id?>"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>
-                            </div>
-                        </div>
-                    <?php endforeach?>
-                </div>
-            </div>
-
-            <div class="block">
-                <div class="category-item-title">
-                    <h2 class="block-title">Sản phẩm giảm giá</h2>
-                </div>
-                <div class="carousel">
-                    <?php foreach($sale_items as $item):?>
+            <?php if(!empty($selling)):?>
+                <div class="block">
+                    <div class="category-item-title">
+                        <h2 class="block-title">Sản phẩm bán chạy</h2>
+                    </div>
+                    <div class="carousel" style="z-index: 99;">
+                        <?php foreach($selling as $sell):
+                        $item = $sell->book;?>
                         <div class="carousel-item">
                             <div class="product-item">
                                 <?=Html::img('@web/'.$item->getThumbnailImageUrl())?>
@@ -87,28 +68,70 @@ use yii\helpers\Url;
                     <?php endforeach?>
                 </div>
             </div>
+        <?php endif?>
+        <div class="block">
+            <div class="category-item-title">
+                <h2 class="block-title">Sản phẩm mới</h2>
+            </div>
+            <div class="carousel" style="z-index: 69;">
+                <?php foreach($new_items as $item):?>
+                    <div class="carousel-item">
+                        <div class="product-item">
+                            <?=Html::img('@web/'.$item->getThumbnailImageUrl())?>
+                            <?= Html::a(Html::encode($item->name), ['item/detail', 'id' => $item->id], ['class' => 'product-item-name']) ?>
+                            <?php if($item->sellPrice != $item->startPrice):?>
+                                <span class="product-item-price-sale"><?=number_format($item->startPrice,0,',','.')?>đ</span>
+                            <?php endif?>
+                            <span class="product-item-price"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
+                            <a class="product-item-cart add_to_cart" id="add_to_cart" data-id="<?=$item->id?>"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                <?php endforeach?>
+            </div>
+        </div>
+
+        <div class="block">
+            <div class="category-item-title">
+                <h2 class="block-title">Sản phẩm giảm giá</h2>
+            </div>
+            <div class="carousel">
+                <?php foreach($sale_items as $item):?>
+                    <div class="carousel-item">
+                        <div class="product-item">
+                            <?=Html::img('@web/'.$item->getThumbnailImageUrl())?>
+                            <?=Html::a(Html::encode($item->name), ['item/detail', 'id' => $item->id], ['class' => 'product-item-name'])?>
+                            <?php if($item->sellPrice != $item->startPrice):?>
+                                <span class="product-item-price-sale"><?=number_format($item->startPrice,0,',','.')?>đ</span>
+                            <?php endif?>
+                            <span class="product-item-price"><?=number_format($item->sellPrice,0,',','.')?>đ</span>
+                            <a class="product-item-cart add_to_cart" id="add_to_cart" data-id="<?=$item->id?>"><i class="material-icons">shopping_cart</i> Thêm vào giỏ</a>
+                        </div>
+                    </div>
+                <?php endforeach?>
+            </div>
         </div>
     </div>
-    <script>
-        $(function(){
-            $('a#add_to_cart').click(function(){
-                $.ajax({
-                    url: '<?=Yii::$app->homeUrl?>item/add_to_cart',
-                    method: 'POST',
-                    data: {
-                        id: $(this).data('id'),
-                        quantity: 1,
-                        type: 'add',
-                    }
-                })
-                .done(function(data) {
-                    data = JSON.parse(data);
-                    Materialize.toast('Bạn đã thêm sản phẩm vào giỏ hàng thành công!', 4000)
-                    $('.item_cart').text(data.total);
-                })
-                .fail(function() {
-                    console.log("error");
-                });
+</div>
+<script>
+    $(function(){
+        $('a#add_to_cart').click(function(){
+            $.ajax({
+                url: '<?=Yii::$app->homeUrl?>item/add_to_cart',
+                method: 'POST',
+                data: {
+                    id: $(this).data('id'),
+                    quantity: 1,
+                    type: 'add',
+                }
             })
+            .done(function(data) {
+                data = JSON.parse(data);
+                Materialize.toast('Bạn đã thêm sản phẩm vào giỏ hàng thành công!', 4000)
+                $('.item_cart').text(data.total);
+            })
+            .fail(function() {
+                console.log("error");
+            });
         })
-    </script>
+    })
+</script>

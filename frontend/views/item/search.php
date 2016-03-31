@@ -8,10 +8,7 @@ use yii\helpers\Url;
             <div class="nav-wrapper">
                 <div class="col s12">
                     <a href="<?=Url::home()?>" class="breadcrumb">Trang chủ</a>
-                    <?php if(!empty($main_category->parentCategory)):?>
-                        <a href="<?=Url::toRoute(['item/category', 'id' => $main_category->parentCategory->id])?>" class="breadcrumb"><?=Html::encode($main_category->parentCategory->name)?></a>
-                    <?php endif;?>
-                    <a href="<?=Url::toRoute(['item/category', 'id' => $main_category->id])?>" class="breadcrumb"><?=Html::encode($main_category->name)?></a>
+                    <a href="#" class="breadcrumb">Tìm kiếm</a>
                 </div>
             </div>
         </nav>
@@ -25,9 +22,9 @@ use yii\helpers\Url;
                         <ul>
                             <?php foreach($categories as $category):?>
                                 <li>
-                                    <a <?php if($category->id == $main_category->id) echo 'class="active"'?> href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a>
+                                    <a href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a>
                                     <?php if(!empty($category->subCategory)):foreach ($category->subCategory as $item):?>
-                                        <a <?php if($item->id == $main_category->id) echo 'class="active"'?> href="<?=Url::toRoute(['item/category', 'id' => $item->id])?>">&nbsp;&nbsp;» <?=Html::encode($item->name)?></a>
+                                        <a href="<?=Url::toRoute(['item/category', 'id' => $item->id])?>">&nbsp;&nbsp;» <?=Html::encode($item->name)?></a>
                                     <?php endforeach;endif?>
                                 </li>
                             <?php endforeach?>
@@ -67,6 +64,7 @@ use yii\helpers\Url;
             <?php endif?>
         </div>
         <div class="col s12 m8 l9 content-category">
+            <div class="search-title">Hiển thị <?=$count?> trên tổng số <?=$total_count?> sản phẩm được tìm thấy</div>
             <?php if(!empty($items)):$i=0;foreach($items as $item):
             if($item->active):
                 if($i%3 == 0) echo '<div class="row">';?>
@@ -89,20 +87,20 @@ use yii\helpers\Url;
 
         <?php endif;endforeach;?>
         <ul class="pagination right">
-            <li <?php if($current == 1) echo 'class="disabled"'?>><a href="<?=Url::toRoute(['item/category', 'id'=>$main_category->id])?>">«</a></li>
+            <li <?php if($current == 1) echo 'class="disabled"'?>><a href="<?=Url::toRoute(['item/search','k'=>$keyword])?>">«</a></li>
             <?php 
             $start = floor($current/5)*5+1;
             if($total < $start+5) $end = $total;else $end = $start + 5; 
             for($i=$start;$i<=$end;$i++):
                 if($i==$current):?>
-            <li class="active"><a href="<?=Url::toRoute(['item/category', 'id'=>$main_category->id,'page'=>$i])?>"><?=$i?></a></li>
+            <li class="active"><a href="<?=Url::toRoute(['item/search','k'=>$keyword,'page'=>$i])?>"><?=$i?></a></li>
         <?php else:?>
-            <li><a href="<?=Url::toRoute(['item/category', 'id'=>$main_category->id,'page'=>$i])?>"><?=$i?></a></li>
+            <li><a href="<?=Url::toRoute(['item/search','k'=>$keyword,'page'=>$i])?>"><?=$i?></a></li>
         <?php endif;endfor?>
-        <li <?php if($current == $total) echo 'class="disabled"'?>><a href="<?=Url::toRoute(['item/category', 'id' => $main_category->id,'page'=>$total])?>">»</a></li>
+        <li <?php if($current == $total) echo 'class="disabled"'?>><a href="<?=Url::toRoute(['item/search','k'=>$keyword,'page'=>$total])?>">»</a></li>
     </ul>
 <?php else:?>
-    <h2 class="cc-products-title">Không có sản phẩm nào</h2>
+    <h2 class="cc-products-title">Không tìm thấy sản phẩm nào</h2>
 <?php endif?>
 </div>
 </div>

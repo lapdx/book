@@ -38,3 +38,36 @@ a:hover, a:focus{
     color: #3c8dbc;
     cursor: pointer;
 }
+.product-info.left{
+    margin-left: 15px;
+}
+.product.product-has-image{
+    margin:20px 0px;
+}
+.register-b-content, .login-b-content{
+    background-color: #fff;
+}
+.logged{
+    color: #fff;
+    margin-right: 15px;
+}
+.product_content{
+    padding-bottom: 50px;
+}
+.pagination li.active {
+    background-color: #3c8dbc;
+}
+.pagination{
+    background-color: #fff;
+}
+.background-white{
+    background-color: #fff;
+    padding: 10px;
+}
+.search-title{
+    margin-bottom: 35x;
+    font-size: 16px;
+}
+#service_info_right{
+    padding: 20px;
+}

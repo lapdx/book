@@ -80,10 +80,7 @@ class Item extends \yii\db\ActiveRecord
     public function getThumbnailImageUrl(){
         $image = Image::findOne(['targetId'=>$this->id]);
         if($image) return $image->imageId;
-        else return 'images/toi-tai-gioi-ban-cung-the-2--1-.jpg';
-    }
-    public function getHotdeal(){
-        return $this->hasMany(Hotdealbox::className(), ['itemId' => 'id']);
+        else return 'images/no-image.png';
     }
     public static function getSellPrice($id){
         return static::findOne(['id'=>$id])->sellPrice;
