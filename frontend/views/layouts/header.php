@@ -76,9 +76,9 @@ $categories = Category::findAll(['parentId'=>0]);
             <!--  -->
             <nav>
              <div class="nav-wrapper">
-              <form method="GET" action="./search/">
+              <form method="GET" action="<?=Url::toRoute(['item/search'])?>">
                 <div class="input-field">
-                  <input id="search" name="q" type="search" required="" placeholder="Tìm kiếm">
+                  <input id="search" name="k" type="search" required="" placeholder="Tìm kiếm">
                   <label for="search" class="active"><i class="material-icons">search</i></label>
                 </div>
               </form>
@@ -144,8 +144,8 @@ $categories = Category::findAll(['parentId'=>0]);
                   <?php endif;endforeach?>
                 </ul>
               </li>
-              <li class="waves-effect waves-light"><a href="#">Giới thiệu</a></li>
-              <li class="waves-effect waves-light"><a href="#">Liên hệ</a></li>
+              <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/intro'])?>">Giới thiệu</a></li>
+              <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/contact'])?>">Liên hệ</a></li>
             </ul>
           </div>
         </div>

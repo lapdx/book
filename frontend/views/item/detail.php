@@ -53,29 +53,29 @@ use yii\helpers\Url;
             
             <div id="service_right" class="col s12 m12 l3">
                 <?php if(!empty($selling)):?>
-                    <div class="sb-block">
+                    <div class="sb-block background-white">
                         <div class="sb-block-title">
                             <h2>Sản phẩm bán chạy</h2>
                         </div>
+                        <div class="sb-block-content sb-products">
+                            <ul>
+                                <?php foreach($selling as $sell):
+                                $item = $sell->book;?>
+                                <li class="product-item-mini">
+                                    <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
+                                        <?= Html::img('@web/'.$item->getThumbnailImageUrl(),['class'=>'pim-image'])?>
+                                        <h3 class="pim-name"><?=Html::encode($item->name)?></h3>
+                                        <p class="pim-description"><?=substr(strip_tags($item->content),0,100)?></p>
+                                        <?php if($item->sellPrice != $item->startPrice):?>
+                                            <p class="pim-price"> <?=$item->sellPrice?>₫ <span> <?=$item->startPrice?>₫ </span></p> 
+                                        <?php else:?>
+                                            <p class="pim-price"> <?=$item->sellPrice?>₫</p>
+                                        <?php endif?>
+                                    </a>
+                                </li>
+                            <?php endforeach?>
+                        </ul>
                     </div>
-                    <div class="sb-block-content sb-products">
-                        <ul>
-                            <?php foreach($selling as $sell):
-                            $item = $sell->book;?>
-                            <li class="product-item-mini">
-                                <a href="<?=Url::toRoute(['item/detail', 'id' => $item->id])?>">
-                                    <?= Html::img('@web/'.$item->getThumbnailImageUrl(),['class'=>'pim-image'])?>
-                                    <h3 class="pim-name"><?=Html::encode($item->name)?></h3>
-                                    <p class="pim-description"><?=substr(strip_tags($item->content),0,100)?></p>
-                                    <?php if($item->sellPrice != $item->startPrice):?>
-                                        <p class="pim-price"> <?=$item->sellPrice?>₫ <span> <?=$item->startPrice?>₫ </span></p> 
-                                    <?php else:?>
-                                        <p class="pim-price"> <?=$item->sellPrice?>₫</p>
-                                    <?php endif?>
-                                </a>
-                            </li>
-                        <?php endforeach?>
-                    </ul>
                 </div>
             <?php endif?>
             <div class="sb-block">

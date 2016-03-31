@@ -47,11 +47,11 @@ use yii\helpers\Url;
     <div class="main_block_section">
         <div class="container">
             <?php if(!empty($selling)):?>
-                <!-- <div class="block">
+                <div class="block">
                     <div class="category-item-title">
                         <h2 class="block-title">Sản phẩm bán chạy</h2>
                     </div>
-                    <div class="carousel" style="z-index: 69;">
+                    <div class="carousel" style="z-index: 99;">
                         <?php foreach($selling as $sell):
                         $item = $sell->book;?>
                         <div class="carousel-item">
@@ -67,7 +67,7 @@ use yii\helpers\Url;
                         </div>
                     <?php endforeach?>
                 </div>
-            </div> -->
+            </div>
         <?php endif?>
         <div class="block">
             <div class="category-item-title">
