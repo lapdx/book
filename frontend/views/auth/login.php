@@ -18,7 +18,7 @@ use yii\bootstrap\Alert;
                 <h3 class="b-login-title text-center">Đăng nhập tài khoản BookStore</h3>
                 <form class="b-loginForm " name="loginForm" method="POST">
                     <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
-                    <?php 
+                    <?php
                     if(Yii::$app->session->hasFlash('danger'))
                         echo Alert::widget([
                             'options' => ['class' => 'alert-danger'],
