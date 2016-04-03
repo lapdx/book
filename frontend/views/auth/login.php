@@ -27,7 +27,7 @@ use yii\bootstrap\Alert;
                             ?>
                             <div class="form-group">
                                 <div class="b-input-group">
-                                    <input name="username" id="no-space" pattern=".{6,}" required title="Tên đăng nhập phải có ít nhất 6 ký tự" type="text" class="form-control" placeholder="Tên đăng nhập" value="<?=$username?>">
+                                    <input name="username" pattern=".{6,}" required title="Tên đăng nhập phải có ít nhất 6 ký tự" type="text" class="form-control" placeholder="Tên đăng nhập" value="<?=$username?>">
                                 </div>
                             </div>
                             <div class="form-group">

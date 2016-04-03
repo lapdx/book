@@ -29,7 +29,7 @@ use yii\helpers\Url;
 							<input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
 							<div class="form-group">
 								<div class="b-input-group">
-									<input id="no-space" pattern=".{6,}" required title="Username phải có ít nhất 6 ký tự" name="username" type="text" class="form-control" placeholder="Tên đăng nhập" value="<?=$data['username']?>">
+									<input pattern=".{6,}" required title="Username phải có ít nhất 6 ký tự" name="username" type="text" class="form-control" placeholder="Tên đăng nhập" value="<?=$data['username']?>">
 								</div>
 							</div>
 							<div class="form-group">
