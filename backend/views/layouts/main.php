@@ -45,7 +45,7 @@ WebAsset::register($this);
         </div><!-- /container -->
         <div class="footer">
             <div class="container">
-                © 2013 - 2014 <a href="#">Peacesoft Solutions Corporation.</a> All rights reserved
+                © 2016 project book
             </div><!-- /container -->
         </div><!-- footer -->
         <div class="top"></div>

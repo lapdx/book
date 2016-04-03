@@ -4,7 +4,7 @@ user.source = null;
 user.grid = function () {
     layout.title("User Grid");
     layout.breadcrumb([
-        ["Dashboad", "#index/grid"],
+        ["Trang chủ", "#index/grid"],
         ["Người dùng", "#administrator/grid"],
         ["Danh sách người dùng"]
     ]);
