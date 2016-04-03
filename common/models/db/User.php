@@ -120,4 +120,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->getAuthKey() === $authKey;
     }
+
+    //function login
+    // public static function login($user)
+    // {
+    //     $session = Yii::$app->session;
+    //     return Yii::$app->getSecurity()->generatePasswordHash($password);
+    // }
 }

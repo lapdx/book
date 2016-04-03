@@ -44,111 +44,118 @@ $categories = Category::findAll(['parentId'=>0]);
       <div class="row">
         <div class="col-xs-12 col-md-2">
           <div id="user_do_login">
-            <div class="user-actions">
-              <?php if(Yii::$app->user->isGuest):?>
+            <?php if(Yii::$app->user->isGuest):?>
+              <div class="user-actions">
                 <a href="<?=Url::toRoute(['auth/signup'])?>">Đăng ký</a>
                 <a href="<?=Url::toRoute(['auth/'])?>">Đăng nhập</a>
-              <?php else:?>
-                <a href="<?=Url::toRoute(['auth/profile'])?>"><?=Yii::$app->user->identity->username?></a>
-                <a href="<?=Url::toRoute(['auth/logout'])?>">Đăng xuất</a>
-                <div class="logged"></div>
-              <?php endif?>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="header">
-    <div class="top-wrap">
-      <!-- Header (logo and header ad) -->
-      <div class="header__main container">
-        <div class="row">
-          <div class="col s12 m4 l2">
-            <div class="logo">
-              <a href="<?=Url::home()?>">
-                <?=Html::img('@web/images/logo-white.png', ['class'=>'logo-responsive'])?>
-              </a>
-            </div>
-          </div>
-          <div class="col s6 m6 l6">
-            <!--  -->
-            <nav>
-             <div class="nav-wrapper">
-              <form method="GET" action="<?=Url::toRoute(['item/search'])?>">
-                <div class="input-field">
-                  <input id="search" name="k" type="search" required="" placeholder="Tìm kiếm">
-                  <label for="search" class="active"><i class="material-icons">search</i></label>
-                </div>
-              </form>
-            </div>
-          </nav>
-        </div>
-        <div class="col s6 m2 l4">
-          <div class="cart-mini right">
-            <div class="cart-mini-button">
-              <a class="waves-effect waves-light" href="<?=Url::toRoute(['index/cart'])?>"><i class="material-icons">shopping_cart</i><span class="item_cart"><?=$session['total']?></span> sản phẩm</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Header -->
-  </div>
-
-  <nav>
-    <div class="container">
-      <div class="nav-wrapper">
-        <!-- <a href="#" class="brand-logo">Logo</a> -->
-        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-        <ul class="segment_mega_menu hide-on-med-and-down">
-          <li class="segment_mega_menu__toggle"><a href="" style="padding-bottom: 1px;"><i class="material-icons">menu</i> Tất cả sản phẩm</a>
-            <div class="mega_menu">
-              <ul class="parent-menu">
-                <?php foreach($categories as $category):?>
-                  <?php if(empty($category->subCategory)):?>
-                    <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a></li>
-                  <?php else:?>
-                    <li class="parent-name">
-                      <a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a>
-                      <ul class="submenu">
-                        <?php foreach($category->subCategory as $item):?>
-                          <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $item->id])?>"><?=Html::encode($item->name)?></a></li>
-                        <?php endforeach?>
-                      </ul>
-                    </li>
-                  <?php endif;endforeach?>
-                </ul>
               </div>
-            </li>
-            <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/intro'])?>">Giới thiệu</a></li>
-            <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/contact'])?>">Liên hệ</a></li>
-            <span class="hotline right"><i class="material-icons">call</i><a href="tel:01688912317">Hỗ trợ: 01688912317 (24/7)</a></span>
-          </ul>
-          <ul class="side-nav" id="mobile-menu">
-            <li class="waves-effect waves-light"><a href=""><i class="material-icons">menu</i> Tất cả sản phẩm</a>
-              <ul class="mobile__parent-menu">
-                <?php foreach($categories as $category):?>
-                  <?php if(empty($category->subCategory)):?>
-                    <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a></li>
-                  <?php else:?>
-                    <li class="mobile__parent-name">
-                      <a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a>
-                      <ul class="mobile__submenu">
-                        <?php foreach($category->subCategory as $item):?>
-                          <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $item->id])?>"><?=Html::encode($item->name)?></a></li>
-                        <?php endforeach?>
-                      </ul>
-                    </li>
-                  <?php endif;endforeach?>
-                </ul>
+            <?php else:?>
+              <ul id="dropdown_profile" class="dropdown-content">
+              <li><a href="<?=Url::toRoute(['auth/profile'])?>">Thông tin cá nhân</a></li>
+                <li><a href="<?=Url::toRoute(['auth/change_password'])?>">Đổi mật khẩu</a></li>
+                <li><a href="<?=Url::toRoute(['auth/logout'])?>">Đăng xuất</a></li>
+              </ul>
+              <div class="user-actions">
+                <a class="dropdown-button" href="#!" data-activates="dropdown_profile">Lê Hữu Đông<i class="material-icons">arrow_drop_down</i></a>
+              </div>
+              <div class="logged"></div>
+              <?php endif?>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="top-wrap">
+        <!-- Header (logo and header ad) -->
+        <div class="header__main container">
+          <div class="row">
+            <div class="col s12 m4 l2">
+              <div class="logo">
+                <a href="<?=Url::home()?>">
+                  <?=Html::img('@web/images/logo-white.png', ['class'=>'logo-responsive'])?>
+                </a>
+              </div>
+            </div>
+            <div class="col s6 m6 l6">
+              <!--  -->
+              <nav>
+               <div class="nav-wrapper">
+                <form method="GET" action="<?=Url::toRoute(['item/search'])?>">
+                  <div class="input-field">
+                    <input id="search" name="k" type="search" required="" placeholder="Tìm kiếm">
+                    <label for="search" class="active"><i class="material-icons">search</i></label>
+                  </div>
+                </form>
+              </div>
+            </nav>
+          </div>
+          <div class="col s6 m2 l4">
+            <div class="cart-mini right">
+              <div class="cart-mini-button">
+                <a class="waves-effect waves-light" href="<?=Url::toRoute(['index/cart'])?>"><i class="material-icons">shopping_cart</i><span class="item_cart"><?=$session['total']?></span> sản phẩm</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Header -->
+    </div>
+
+    <nav>
+      <div class="container">
+        <div class="nav-wrapper">
+          <!-- <a href="#" class="brand-logo">Logo</a> -->
+          <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="segment_mega_menu hide-on-med-and-down">
+            <li class="segment_mega_menu__toggle"><a href="" style="padding-bottom: 1px;"><i class="material-icons">menu</i> Tất cả sản phẩm</a>
+              <div class="mega_menu">
+                <ul class="parent-menu">
+                  <?php foreach($categories as $category):?>
+                    <?php if(empty($category->subCategory)):?>
+                      <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a></li>
+                    <?php else:?>
+                      <li class="parent-name">
+                        <a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a>
+                        <ul class="submenu">
+                          <?php foreach($category->subCategory as $item):?>
+                            <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $item->id])?>"><?=Html::encode($item->name)?></a></li>
+                          <?php endforeach?>
+                        </ul>
+                      </li>
+                    <?php endif;endforeach?>
+                  </ul>
+                </div>
               </li>
               <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/intro'])?>">Giới thiệu</a></li>
               <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/contact'])?>">Liên hệ</a></li>
+              <span class="hotline right"><i class="material-icons">call</i><a href="tel:01688912317">Hỗ trợ: 01688912317 (24/7)</a></span>
             </ul>
+            <ul class="side-nav" id="mobile-menu">
+              <li class="waves-effect waves-light"><a href=""><i class="material-icons">menu</i> Tất cả sản phẩm</a>
+                <ul class="mobile__parent-menu">
+                  <?php foreach($categories as $category):?>
+                    <?php if(empty($category->subCategory)):?>
+                      <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a></li>
+                    <?php else:?>
+                      <li class="mobile__parent-name">
+                        <a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $category->id])?>"><?=Html::encode($category->name)?></a>
+                        <ul class="mobile__submenu">
+                          <?php foreach($category->subCategory as $item):?>
+                            <li><a class="waves-effect waves-light" href="<?=Url::toRoute(['item/category', 'id' => $item->id])?>"><?=Html::encode($item->name)?></a></li>
+                          <?php endforeach?>
+                        </ul>
+                      </li>
+                    <?php endif;endforeach?>
+                  </ul>
+                </li>
+                <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/intro'])?>">Giới thiệu</a></li>
+                <li class="waves-effect waves-light"><a href="<?=Url::toRoute(['index/contact'])?>">Liên hệ</a></li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-    </div>
+        </nav>
+      </div>
 

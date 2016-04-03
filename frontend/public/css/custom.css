@@ -71,3 +71,32 @@ a:hover, a:focus{
 #service_info_right{
     padding: 20px;
 }
+@media (min-width: 200px) {
+    .product-item img{
+        width: 80% !important;
+    }
+    .main_block_section .carousel{
+        height: 610px;
+        margin-top: -100px;
+    }
+}
+
+@media (min-width: 768px) {
+    .product-item img{
+        width: 80% !important;
+    }
+    .main_block_section .carousel{
+        height: 610px;
+        margin-top: -100px;
+    }
+}
+
+@media (min-width: 992px) {
+    .product-item img{
+        width: 90% !important;
+    }
+    .main_block_section .carousel{
+        height: 700px;
+        margin-top: -150px;
+    }
+}

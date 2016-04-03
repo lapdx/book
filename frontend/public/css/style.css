@@ -254,8 +254,8 @@ table tr, table tr td, table tr th {
 }
 
 .main_block_section .carousel {
-	height: 800px!important;
-	margin-top: -200px;
+	/*height: 800px!important;*/
+	/*margin-top: -200px;*/
 	margin-bottom: 30px;
 }
 
@@ -888,4 +888,53 @@ div#service_info_left {}
 
 .b__contact p {
 	margin: 10px 0px;
+}
+/* Profile */
+.b__profile_user {
+	padding-bottom: 30px!important;
+}
+
+.b__profile_user .form-group {
+	overflow: hidden;
+}
+
+.b__profile_user h3 {
+	font-size: 24px;
+}
+
+.b__profile_user .change_pw {
+	margin-top: 60px;
+}
+
+.b__btn_color {
+	background-color: #1e80cb;
+}
+
+#dropdown_profile {
+	width: 169px!important;
+	top: 40px!important;
+	right: 0!important;
+	overflow-y: visible;
+	font-size: 14px;
+	border-radius: 4px;
+}
+
+#dropdown_profile li {
+	white-space: nowrap;
+	min-height: auto;
+}
+
+#dropdown_profile li a {
+	color: #333;
+	font-size: 14px;
+	padding: 8px 12px;
+}
+
+.dropdown-button i {
+	vertical-align: middle;
+	margin-top: -2px;
+}
+
+.user-actions a.dropdown-button:after {
+	content: none;
 }

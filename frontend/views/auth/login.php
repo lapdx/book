@@ -18,7 +18,7 @@ use yii\bootstrap\Alert;
                 <h3 class="b-login-title text-center">Đăng nhập tài khoản BookStore</h3>
                 <form class="b-loginForm " name="loginForm" method="POST">
                     <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
-                    <?php 
+                    <?php
                     if(Yii::$app->session->hasFlash('danger'))
                         echo Alert::widget([
                             'options' => ['class' => 'alert-danger'],
@@ -27,7 +27,7 @@ use yii\bootstrap\Alert;
                             ?>
                             <div class="form-group">
                                 <div class="b-input-group">
-                                    <input name="username" id="no-space" pattern=".{6,}" required title="Tên đăng nhập phải có ít nhất 6 ký tự" type="text" class="form-control" placeholder="Tên đăng nhập" value="<?=$username?>">
+                                    <input name="username" pattern=".{6,}" required title="Tên đăng nhập phải có ít nhất 6 ký tự" type="text" class="form-control" placeholder="Tên đăng nhập" value="<?=$username?>">
                                 </div>
                             </div>
                             <div class="form-group">
