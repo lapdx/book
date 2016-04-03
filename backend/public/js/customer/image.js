@@ -3,7 +3,7 @@ var image = {};
 image.grid = function () {
     layout.title("Image Grid");
     layout.breadcrumb([
-        ["Dashboad", "#image/grid"],
+        ["Trang chủ", "#image/grid"],
         ["System Images", "#image/grid"],
         ["Image grid"]
     ]);

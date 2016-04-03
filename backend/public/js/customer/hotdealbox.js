@@ -2,7 +2,7 @@ var hotdealbox = {};
 hotdealbox.grid = function () {
     layout.title("Quản trị sản phẩm nội bật");
     layout.breadcrumb([
-        ["Dashboad", "#hotdealbox/grid"],
+        ["Trang chủ", "#hotdealbox/grid"],
         ["Sản phẩm nội bật", "#hotdealbox/grid"],
         ["Danh sách sản phẩm nội bật"]
     ]);
